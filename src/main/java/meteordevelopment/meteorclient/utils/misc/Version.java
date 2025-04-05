@@ -26,7 +26,7 @@ public class Version {
     }
 
     public boolean isZero() {
-        return numbers[0] == 0 && numbers[1] == 0;
+        return numbers[0] == 0;
     }
 
     public boolean isHigherThan(Version version) {
