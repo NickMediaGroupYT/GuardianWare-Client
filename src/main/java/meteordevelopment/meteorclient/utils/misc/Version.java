@@ -11,12 +11,12 @@ public class Version {
 
     public Version(String string) {
         this.string = string;
-        this.numbers = new int[3];
+        this.numbers = new int[1];
 
         String[] split = string.split("\\.");
-        if (split.length != 3) throw new IllegalArgumentException("Version string needs to have 3 numbers.");
+        if (split.length != 1) throw new IllegalArgumentException("Version string needs to have 1 numbers.");
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 1; i++) {
             try {
                 numbers[i] = Integer.parseInt(split[i]);
             } catch (NumberFormatException e) {
@@ -26,11 +26,11 @@ public class Version {
     }
 
     public boolean isZero() {
-        return numbers[0] == 0 && numbers[1] == 0 && numbers[2] == 0;
+        return numbers[0] == 0 && numbers[1] == 0;
     }
 
     public boolean isHigherThan(Version version) {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 1; i++) {
             if (numbers[i] > version.numbers[i]) return true;
             if (numbers[i] < version.numbers[i]) return false;
         }
