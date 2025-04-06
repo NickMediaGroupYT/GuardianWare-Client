@@ -52,6 +52,7 @@ public class Systems {
         add(new Proxies());
         add(new Hud());
         add(new AntiCheatConfig());
+        add(new NCPAntiCheatConfig());
 
         MeteorClient.EVENT_BUS.subscribe(Systems.class);
     }

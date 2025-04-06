@@ -20,12 +20,12 @@ public class AntiCheatConfig extends System<AntiCheatConfig> {
                         .description("Lets rotations be rotated. Should always be on.")
                         .defaultValue(true).build());
 
-        public final Setting<Boolean> grimRotation =
+        public final Setting<Boolean> rotation =
                         sgRotations.add(new BoolSetting.Builder().name("grim-rotation")
                                         .description("Sends a full movement packet every tick")
                                         .defaultValue(false).visible(() -> tickSync.get()).build());
 
-        public final Setting<Boolean> grimSnapRotation = sgRotations.add(new BoolSetting.Builder()
+        public final Setting<Boolean> snapRotation = sgRotations.add(new BoolSetting.Builder()
                         .name("grim-snap-rotation")
                         .description("Sends a full movement packet when snapping rotation")
                         .defaultValue(true).build());
@@ -63,7 +63,7 @@ public class AntiCheatConfig extends System<AntiCheatConfig> {
                                         .defaultValue(20).min(0).sliderMax(30).build());
 
         public AntiCheatConfig() {
-                super("anti-cheat-config");
+                super("grim-anti-cheat-config");
         }
 
         public static AntiCheatConfig get() {

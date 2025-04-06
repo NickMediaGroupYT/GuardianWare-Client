@@ -58,7 +58,7 @@ public class RotationManager {
     public void snapAt(Vec3d target) {
         float[] angle = getRotation(target);
 
-        if (antiCheatConfig.grimSnapRotation.get()) {
+        if (antiCheatConfig.snapRotation.get()) {
             mc.getNetworkHandler().sendPacket(
                     new PlayerMoveC2SPacket.Full(lastX, lastY, lastZ, angle[0], angle[1], lastGround));
         } else {
@@ -68,7 +68,7 @@ public class RotationManager {
     }
 
     public void snapAt(float yaw, float pitch) {
-        if (antiCheatConfig.grimSnapRotation.get()) {
+        if (antiCheatConfig.snapRotation.get()) {
             mc.getNetworkHandler().sendPacket(
                     new PlayerMoveC2SPacket.Full(lastX, lastY, lastZ, yaw, pitch, lastGround));
         } else {
@@ -246,7 +246,7 @@ public class RotationManager {
             event.pitch = rotateEvent.getPitch();
         }
 
-        if (antiCheatConfig.grimRotation.get()) {
+        if (antiCheatConfig.rotation.get()) {
             event.forceFull = true;
         }
     }
