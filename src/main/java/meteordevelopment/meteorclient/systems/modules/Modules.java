@@ -532,6 +532,9 @@ public class Modules extends System<Modules> {
         add(new NoJumpDelay());
         // add(new GrimBoatTeleport());
         add(new GrimEfly());
+        add(new Pitch40Util());
+        add(new Firework());
+        add(new AFKVanillaFly());
     }
 
     private void initRender() {
@@ -616,6 +619,8 @@ public class Modules extends System<Modules> {
         add(new TridentDupe());
         add(new StorageLooter());
         add(new AutoEnchant());
+        add(new TrailFollower());
+        add(new AutoPortal());
     }
 
     private void initMisc() {
