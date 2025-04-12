@@ -419,7 +419,7 @@ public class TrailFollower extends Module {
             event.renderer.line(mc.player.getX(), mc.player.getY(), mc.player.getZ(), posDebug.x, targetPos.y, posDebug.z, new Color(0, 0, 255));
     }
 
-    @net.lenni0451.lambdaevents.EventHandler(priority = -1)
+    @EventHandler(priority = -1)
     public void onChunkData(ChunkDataEvent event) {
         WorldChunk chunk = event.chunk();
         long chunkLong = chunk.getPos().toLong();
