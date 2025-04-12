@@ -6,8 +6,11 @@
 package meteordevelopment.meteorclient.systems.modules.world;
 
 import meteordevelopment.meteorclient.settings.*;
-import meteordevelopment.meteorclient.systems.modules.Categories;
 import meteordevelopment.meteorclient.systems.modules.Module;
+import xaeroplus.XaeroPlus;
+import xaeroplus.event.ChunkDataEvent;
+import xaeroplus.module.ModuleManager;
+import xaeroplus.module.impl.OldChunks;
 
 import static meteordevelopment.meteorclient.utils.misc.PathSeekerUtil.sendWebhook;
 
