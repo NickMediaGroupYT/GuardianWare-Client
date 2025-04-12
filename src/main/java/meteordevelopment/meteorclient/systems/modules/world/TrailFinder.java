@@ -8,8 +8,6 @@ package meteordevelopment.meteorclient.systems.modules.world;
 import meteordevelopment.meteorclient.settings.*;
 import meteordevelopment.meteorclient.systems.modules.Categories;
 import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.meteorclient.systems.modules.Modules;
-import meteordevelopment.meteorclient.systems.modules.render.NewChunks;
 import xaeroplus.XaeroPlus;
 import xaeroplus.event.ChunkDataEvent;
 
