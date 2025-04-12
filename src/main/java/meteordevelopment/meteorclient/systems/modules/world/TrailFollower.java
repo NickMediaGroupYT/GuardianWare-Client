@@ -7,8 +7,6 @@ package meteordevelopment.meteorclient.systems.modules.world;
 
 import baritone.api.BaritoneAPI;
 import baritone.api.pathing.goals.GoalXZ;
-import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ReferenceSet;
 import meteordevelopment.meteorclient.events.render.Render3DEvent;
@@ -31,12 +29,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.chunk.WorldChunk;
-import xaeroplus.XaeroPlus;
-import xaeroplus.event.ChunkDataEvent;
-import xaeroplus.module.ModuleManager;
-import xaeroplus.module.impl.PaletteNewChunks;
-import xaeroplus.util.ChunkScanner;
-import xaeroplus.util.ChunkUtils;
 
 import java.time.Duration;
 import java.util.ArrayDeque;
