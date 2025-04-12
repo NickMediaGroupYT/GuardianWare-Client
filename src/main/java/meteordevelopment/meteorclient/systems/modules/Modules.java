@@ -621,6 +621,7 @@ public class Modules extends System<Modules> {
         add(new AutoEnchant());
         add(new TrailFollower());
         add(new AutoPortal());
+        add(new TrailFinder());
     }
 
     private void initMisc() {
