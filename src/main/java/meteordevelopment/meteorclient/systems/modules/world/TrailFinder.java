@@ -108,7 +108,7 @@ public class TrailFinder extends Module {
 
         if (!(inXRange || inZRange)) return;
 
-        boolean isOldChunk = Modules.get().isActive(NewChunks.class);
+        boolean isOldChunk = ModuleManager.getModule(OldChunks.class)
             .isOldChunk(event.chunk().getPos().x, event.chunk().getPos().z, event.chunk().getWorld().getRegistryKey());
 
         if (!isOldChunk) return;
