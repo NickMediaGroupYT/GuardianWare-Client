@@ -8,6 +8,7 @@ package meteordevelopment.meteorclient.systems.modules.world;
 import meteordevelopment.meteorclient.settings.*;
 import meteordevelopment.meteorclient.systems.modules.Categories;
 import meteordevelopment.meteorclient.systems.modules.Module;
+import meteordevelopment.orbit.EventHandler;
 import xaeroplus.XaeroPlus;
 import xaeroplus.event.ChunkDataEvent;
 import xaeroplus.module.ModuleManager;
@@ -90,7 +91,7 @@ public class TrailFinder extends Module {
         XaeroPlus.EVENT_BUS.unregister(this);
     }
 
-    @net.lenni0451.lambdaevents.EventHandler(priority = -1)
+    @EventHandler(priority = -1)
     public void onChunkData(ChunkDataEvent event) {
         if (mc.player == null || webhookLink.get().isEmpty()) return;
 
