@@ -135,7 +135,7 @@ public class Pitch40Util extends Module {
     }
 
     private void handleFirework() {
-        int launchStatus = firework(mc);
+        int launchStatus = firework(mc, false);
         if (launchStatus >= 0) {
             fireworkCooldown = fireworkCooldownTicks.get();
             if (launchStatus != 200) {

@@ -115,7 +115,7 @@ public class PathSeekerUtil {
         }
     }
 
-    public static int firework(MinecraftClient mc) {
+    public static int firework(MinecraftClient mc, boolean b) {
         int elytraSwapSlot = -1;
 
         if (!mc.player.getInventory().getArmorStack(2).isOf(Items.ELYTRA)) {

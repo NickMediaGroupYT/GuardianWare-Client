@@ -5,7 +5,10 @@
 
 package meteordevelopment.meteorclient.systems.modules.world;
 
-import meteordevelopment.meteorclient.settings.*;
+import meteordevelopment.meteorclient.settings.BoolSetting;
+import meteordevelopment.meteorclient.settings.Setting;
+import meteordevelopment.meteorclient.settings.SettingGroup;
+import meteordevelopment.meteorclient.settings.StringSetting;
 import meteordevelopment.meteorclient.systems.modules.Categories;
 import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.orbit.EventHandler;
@@ -13,115 +16,90 @@ import xaeroplus.XaeroPlus;
 import xaeroplus.event.ChunkDataEvent;
 import xaeroplus.module.ModuleManager;
 import xaeroplus.module.impl.OldChunks;
+import xaeroplus.module.impl.PaletteNewChunks;
 
 import static meteordevelopment.meteorclient.utils.misc.PathSeekerUtil.sendWebhook;
 
+
 public class TrailFinder extends Module {
+
     private final SettingGroup sgGeneral = settings.getDefaultGroup();
 
     public final Setting<String> webhookLink = sgGeneral.add(new StringSetting.Builder()
         .name("Webhook Link")
-        .description("Your Discord webhook URL.")
+        .description("A discord webhook link. Looks like this: https://discord.com/api/webhooks/webhookUserId/webHookTokenOrSomething")
         .defaultValue("")
-        .build());
+        .build()
+    );
 
     public final Setting<Boolean> ping = sgGeneral.add(new BoolSetting.Builder()
         .name("Ping")
-        .description("Whether to ping your Discord ID.")
+        .description("Whether to ping you or not.")
         .defaultValue(false)
-        .build());
+        .build()
+    );
 
     public final Setting<String> discordId = sgGeneral.add(new StringSetting.Builder()
         .name("Discord ID")
-        .description("Your Discord user ID.")
+        .description("Your discord ID")
         .defaultValue("")
         .visible(ping::get)
-        .build());
-
-    // Range settings
-    public final Setting<Integer> xPositiveRange = sgGeneral.add(new IntSetting.Builder()
-        .name("X+ Range")
-        .description("Distance to scan in the +X direction.")
-        .defaultValue(150)
-        .min(0)
-        .max(190)
-        .build());
-
-    public final Setting<Integer> xNegativeRange = sgGeneral.add(new IntSetting.Builder()
-        .name("X- Range")
-        .description("Distance to scan in the -X direction.")
-        .defaultValue(150)
-        .min(0)
-        .max(190)
-        .build());
-
-    public final Setting<Boolean> enableZAxis = sgGeneral.add(new BoolSetting.Builder()
-        .name("Enable Z Axis")
-        .description("Whether to scan Z+ and Z- directions.")
-        .defaultValue(false)
-        .build());
-
-    public final Setting<Integer> zPositiveRange = sgGeneral.add(new IntSetting.Builder()
-        .name("Z+ Range")
-        .defaultValue(150)
-        .min(0)
-        .max(190)
-        .visible(enableZAxis::get)
-        .build());
-
-    public final Setting<Integer> zNegativeRange = sgGeneral.add(new IntSetting.Builder()
-        .name("Z- Range")
-        .defaultValue(150)
-        .min(0)
-        .max(190)
-        .visible(enableZAxis::get)
-        .build());
+        .build()
+    );
 
     public TrailFinder() {
-        super(Categories.World, "TrailFinder", "Notifies you when old chunks are found within a directional range.");
+        super(Categories.World, "TrailFinder", "Sends a webhook message and optionally pings you when an old chunk is detected.");
     }
 
     @Override
-    public void onActivate() {
+    public void onActivate()
+    {
         XaeroPlus.EVENT_BUS.register(this);
     }
 
     @Override
-    public void onDeactivate() {
+    public void onDeactivate()
+    {
         XaeroPlus.EVENT_BUS.unregister(this);
     }
 
-    @EventHandler(priority = -1)
-    public void onChunkData(ChunkDataEvent event) {
-        if (mc.player == null || webhookLink.get().isEmpty()) return;
+    @EventHandler
+    public void onChunkData(ChunkDataEvent event)
+    {
+        // avoid 2b2t end loading screen
+        if (mc.player.getAbilities().allowFlying) return;
 
-        int playerX = mc.player.getBlockX();
-        int playerZ = mc.player.getBlockZ();
-        int chunkX = event.chunk().getPos().x * 16;
-        int chunkZ = event.chunk().getPos().z * 16;
+        if (webhookLink.get().isEmpty()) return;
+        boolean is119NewChunk = ModuleManager.getModule(PaletteNewChunks.class)
+            .isNewChunk(
+                event.chunk().getPos().x,
+                event.chunk().getPos().z,
+                event.chunk().getWorld().getRegistryKey()
+            );
 
-        boolean inXRange = (chunkX >= playerX && chunkX <= playerX + xPositiveRange.get())
-                        || (chunkX <= playerX && chunkX >= playerX - xNegativeRange.get());
+        boolean is112OldChunk = ModuleManager.getModule(OldChunks.class)
+            .isOldChunk(
+                event.chunk().getPos().x,
+                event.chunk().getPos().z,
+                event.chunk().getWorld().getRegistryKey()
+            );
 
-        boolean inZRange = enableZAxis.get() && (
-                          (chunkZ >= playerZ && chunkZ <= playerZ + zPositiveRange.get())
-                       || (chunkZ <= playerZ && chunkZ >= playerZ - zNegativeRange.get()));
+        if (is119NewChunk && !is112OldChunk) return;
 
-        if (!(inXRange || inZRange)) return;
+        String message = "";
 
-        boolean isOldChunk = ModuleManager.getModule(OldChunks.class)
-            .isOldChunk(event.chunk().getPos().x, event.chunk().getPos().z, event.chunk().getWorld().getRegistryKey());
-
-        if (!isOldChunk) return;
-
+        if (is112OldChunk && !is119NewChunk) {
+            message = "1.12 Followed in 1.19+ Old Chunk Detected";
+        } else if (is112OldChunk && is119NewChunk) {
+            message = "1.12 Unfollowed in 1.19+ Old Chunk Detected";
+        } else {
+            message = "1.19+ Old Chunk Detected";
+        }
+        String finalMessage = message;
+        // use threads so if a ton of chunks come at once it doesnt lag the game
         String discordID = discordId.get().isBlank() ? null : discordId.get();
-        String chunkPos = "Chunk at (" + chunkX + ", " + chunkZ + ")";
-        new Thread(() -> sendWebhook(
-            webhookLink.get(),
-            "Old Chunk Detected",
-            chunkPos + " near your trail.",
-            discordID,
-            mc.player.getGameProfile().getName()
-        )).start();
+        new Thread(() -> sendWebhook(webhookLink.get(), "Old Chunk Detected", finalMessage + " at " + mc.player.getPos().toString(), discordID, mc.player.getGameProfile().getName())).start();
+
     }
+
 }
