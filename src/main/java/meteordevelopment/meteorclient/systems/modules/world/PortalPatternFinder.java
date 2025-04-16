@@ -184,6 +184,11 @@ public class PortalPatternFinder extends Module {
         clearChunkData();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onScreenOpen(OpenScreenEvent event) {
         if (event.screen instanceof DisconnectedScreen || event.screen instanceof DownloadingTerrainScreen)

@@ -98,6 +98,11 @@ public class Flamethrower extends Module {
         entity = null;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onTick(TickEvent.Pre event) {
         entity = null;

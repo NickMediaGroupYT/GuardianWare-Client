@@ -42,6 +42,11 @@ public class TimeChanger extends Module {
         mc.world.setTimeOfDay(oldTime);
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onPacketReceive(PacketEvent.Receive event) {
         if (event.packet instanceof WorldTimeUpdateS2CPacket) {

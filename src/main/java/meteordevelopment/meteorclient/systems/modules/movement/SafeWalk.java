@@ -19,4 +19,9 @@ public class SafeWalk extends Module {
     private void onClipAtLedge(ClipAtLedgeEvent event) {
         if (!mc.player.isSneaking()) event.setClip(true);
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

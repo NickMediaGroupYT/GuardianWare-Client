@@ -172,6 +172,11 @@ public class DiscordPresence extends Module {
         DiscordIPC.stop();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     private void recompile(List<String> messages, List<Script> scripts) {
         scripts.clear();
 

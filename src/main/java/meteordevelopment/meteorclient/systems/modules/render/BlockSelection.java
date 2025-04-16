@@ -118,4 +118,9 @@ public class BlockSelection extends Module {
     private void render(Render3DEvent event, BlockPos bp, Box box) {
         event.renderer.box(bp.getX() + box.minX, bp.getY() + box.minY, bp.getZ() + box.minZ, bp.getX() + box.maxX, bp.getY() + box.maxY, bp.getZ() + box.maxZ, sideColor.get(), lineColor.get(), shapeMode.get(), 0);
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

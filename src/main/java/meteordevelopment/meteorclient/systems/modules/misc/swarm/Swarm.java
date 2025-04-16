@@ -83,6 +83,11 @@ public class Swarm extends Module {
     }
 
     @Override
+    public void onRender() {
+
+    }
+
+    @Override
     public void onActivate() {
         close();
     }

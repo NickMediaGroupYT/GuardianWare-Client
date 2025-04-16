@@ -15,6 +15,11 @@ import net.minecraft.item.ItemStack;
 import java.util.List;
 
 public class FastUse extends Module {
+    @Override
+    public void onRender() {
+
+    }
+
     public enum Mode {
         All,
         Some

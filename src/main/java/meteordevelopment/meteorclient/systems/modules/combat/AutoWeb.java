@@ -69,4 +69,9 @@ public class AutoWeb extends Module {
             BlockUtils.place(target.getBlockPos().add(0, 1, 0), InvUtils.findInHotbar(Items.COBWEB), rotate.get(), 0, false);
         }
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

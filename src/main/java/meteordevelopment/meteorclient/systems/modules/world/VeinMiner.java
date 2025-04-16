@@ -276,6 +276,11 @@ public class VeinMiner extends Module {
         return mode.get().toString() + " (" + selectedBlocks.get().size() + ")";
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public enum ListMode {
         Whitelist,
         Blacklist

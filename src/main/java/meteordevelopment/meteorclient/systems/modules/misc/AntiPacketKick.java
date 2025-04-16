@@ -36,4 +36,9 @@ public class AntiPacketKick extends Module {
     public boolean catchExceptions() {
         return isActive() && catchExceptions.get();
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

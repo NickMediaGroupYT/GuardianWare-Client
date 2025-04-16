@@ -395,6 +395,11 @@ public class Nametags extends Module {
         return Integer.toString(getRenderCount());
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     private double getHeight(Entity entity) {
         double height = entity.getEyeHeight(entity.getPose());
 
@@ -442,7 +447,7 @@ public class Nametags extends Module {
         else healthColor = GREEN;
 
         // Totem pops
-        String totemPopsText = " " + (-MeteorClient.INFO.getPops(player)); 
+        String totemPopsText = " " + (-MeteorClient.INFO.getPops(player));
 
         // Ping
         int ping = EntityUtils.getPing(player);

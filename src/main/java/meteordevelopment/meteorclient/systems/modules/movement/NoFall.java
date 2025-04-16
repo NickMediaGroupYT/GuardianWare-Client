@@ -182,14 +182,14 @@ public class NoFall extends Module {
                     useItem(InvUtils.findInHotbar(Items.BUCKET), false, targetPos.down(), true);
                 }
             }
-        } 
+        }
 
 
         // Elytra swap
         else if (mode.get() == Mode.Elytra) {
             if (mc.player.fallDistance > 5) {
                 BlockHitResult result = mc.world.raycast(new RaycastContext(mc.player.getPos(), mc.player.getPos().subtract(0, 5, 0), RaycastContext.ShapeType.OUTLINE, RaycastContext.FluidHandling.NONE, mc.player));
-                
+
                 if (result != null && result.getType() == HitResult.Type.BLOCK) {
                     ElytraFakeFly fakeFly = Modules.get().get(ElytraFakeFly.class);
 
@@ -239,6 +239,11 @@ public class NoFall extends Module {
     @Override
     public String getInfoString() {
         return mode.get().toString();
+    }
+
+    @Override
+    public void onRender() {
+
     }
 
     public enum Mode {

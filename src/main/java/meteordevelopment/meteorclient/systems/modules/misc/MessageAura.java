@@ -46,4 +46,9 @@ public class MessageAura extends Module {
             ChatUtils.sendPlayerMsg("/msg " + event.entity.getName().getString() + " " + message.get());
         }
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

@@ -54,6 +54,11 @@ public class EntityOwner extends Module {
         uuidToName.clear();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onRender2D(Render2DEvent event) {
         for (Entity entity : mc.world.getEntities()) {

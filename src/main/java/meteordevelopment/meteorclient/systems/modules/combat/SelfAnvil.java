@@ -32,4 +32,9 @@ public class SelfAnvil extends Module {
             toggle();
         }
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

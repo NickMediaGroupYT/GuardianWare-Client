@@ -112,6 +112,11 @@ public class AutoWasp extends Module {
         target = null;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onTick(TickEvent.Pre event) {
         if (target.isRemoved()) {

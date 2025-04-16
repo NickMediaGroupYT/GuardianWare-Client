@@ -84,6 +84,11 @@ public class FreeLook extends Module {
         if (mc.options.getPerspective() != prePers && togglePerspective.get()) mc.options.setPerspective(prePers);
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public boolean playerMode() {
         return isActive() && mc.options.getPerspective() == Perspective.THIRD_PERSON_BACK && mode.get() == Mode.Player;
     }

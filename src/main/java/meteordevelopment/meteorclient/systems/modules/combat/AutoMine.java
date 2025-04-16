@@ -1,12 +1,6 @@
 package meteordevelopment.meteorclient.systems.modules.combat;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
 import meteordevelopment.meteorclient.events.meteor.SilentMineFinishedEvent;
 import meteordevelopment.meteorclient.events.render.Render3DEvent;
 import meteordevelopment.meteorclient.events.world.TickEvent;
@@ -32,6 +26,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
+
+import java.util.*;
 
 public class AutoMine extends Module {
     private final SettingGroup sgGeneral = settings.getDefaultGroup();
@@ -455,6 +451,11 @@ public class AutoMine extends Module {
         }
 
         return String.format("%s", EntityUtils.getName(targetPlayer));
+    }
+
+    @Override
+    public void onRender() {
+
     }
 
     private class CityBlock {

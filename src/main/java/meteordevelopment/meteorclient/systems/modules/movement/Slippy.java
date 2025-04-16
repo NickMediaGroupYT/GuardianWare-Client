@@ -49,6 +49,11 @@ public class Slippy extends Module {
         super(Categories.Movement, "slippy", "Changes the base friction level of blocks.");
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public enum ListMode {
         Whitelist,
         Blacklist

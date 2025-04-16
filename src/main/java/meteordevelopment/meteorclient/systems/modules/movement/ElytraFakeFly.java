@@ -100,6 +100,11 @@ public class ElytraFakeFly extends Module {
         mc.player.setSneaking(false);
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onTick(TickEvent.Post event) {
         boolean isUsingFirework = getIsUsingFirework();

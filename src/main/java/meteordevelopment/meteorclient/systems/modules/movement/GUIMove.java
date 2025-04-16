@@ -104,6 +104,11 @@ public class GUIMove extends Module {
         if (sprint.get()) set(mc.options.sprintKey, false);
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public boolean disableSpace() {
         return isActive() && jump.get() && mc.options.jumpKey.isDefault();
     }

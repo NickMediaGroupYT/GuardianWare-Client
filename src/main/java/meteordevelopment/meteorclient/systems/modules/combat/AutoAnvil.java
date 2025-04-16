@@ -156,4 +156,9 @@ public class AutoAnvil extends Module {
     public String getInfoString() {
         return EntityUtils.getName(target);
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

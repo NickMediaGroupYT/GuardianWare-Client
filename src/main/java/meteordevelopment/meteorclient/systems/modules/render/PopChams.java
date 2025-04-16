@@ -99,6 +99,11 @@ public class PopChams extends Module {
         }
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onReceivePacket(PacketEvent.Receive event) {
         if (!(event.packet instanceof EntityStatusS2CPacket p)) return;

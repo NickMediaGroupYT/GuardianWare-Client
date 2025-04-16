@@ -367,7 +367,7 @@ public class ESP extends Module {
                     return Config.get().enemyColor.get();
                 }
             }
-             
+
             return EntityUtils.getColorFromDistance(entity);
         } else if (entity instanceof PlayerEntity) {
             return PlayerUtils.getPlayerColor(((PlayerEntity) entity), playersColor.get());
@@ -385,6 +385,11 @@ public class ESP extends Module {
     @Override
     public String getInfoString() {
         return Integer.toString(count);
+    }
+
+    @Override
+    public void onRender() {
+
     }
 
     public boolean isShader() {

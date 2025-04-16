@@ -214,4 +214,7 @@ public abstract class Module implements ISerializable<Module>, Comparable<Module
     public int compareTo(@NotNull Module o) {
         return name.compareTo(o.name);
     }
+
+    // You can render information to the screen, here is an example of how you might do that
+    public abstract void onRender();
 }

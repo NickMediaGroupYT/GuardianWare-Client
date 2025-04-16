@@ -79,6 +79,11 @@ public class AutoNametag extends Module {
         entityCooldowns.clear();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onTickPre(TickEvent.Pre event) {
         // Find nametag in hotbar

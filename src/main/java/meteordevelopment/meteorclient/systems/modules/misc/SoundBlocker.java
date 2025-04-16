@@ -60,4 +60,9 @@ public class SoundBlocker extends Module {
     public double getCrystalHitVolume() {
         return crystalHitVolume.get();
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

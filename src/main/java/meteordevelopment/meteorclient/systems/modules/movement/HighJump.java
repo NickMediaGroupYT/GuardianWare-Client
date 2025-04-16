@@ -32,4 +32,9 @@ public class HighJump extends Module {
     private void onJumpVelocityMultiplier(JumpVelocityMultiplierEvent event) {
         event.multiplier *= multiplier.get();
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

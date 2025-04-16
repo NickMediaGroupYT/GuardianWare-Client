@@ -50,4 +50,9 @@ public class AntiAnvil extends Module {
             }
         }
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

@@ -106,6 +106,11 @@ public class Blink extends Module {
         return String.format("%.1f", timer / 20f);
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     private void dumpPackets(boolean send) {
         synchronized (packets) {
             if (send) packets.forEach(mc.player.networkHandler::sendPacket);

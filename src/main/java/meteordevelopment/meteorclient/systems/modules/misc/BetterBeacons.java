@@ -12,4 +12,9 @@ public class BetterBeacons extends Module {
     public BetterBeacons() {
         super(Categories.Misc, "better-beacons", "Select effects unaffected by beacon level.");
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

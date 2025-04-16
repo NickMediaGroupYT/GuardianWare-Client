@@ -142,7 +142,7 @@ public class AutoTrap extends Module {
             return;
         }
 
-        
+
 
         actualPlacePositions.forEach(blockPos -> {
             boolean isCrystalBlock = false;
@@ -256,6 +256,11 @@ public class AutoTrap extends Module {
     @Override
     public String getInfoString() {
         return EntityUtils.getName(target);
+    }
+
+    @Override
+    public void onRender() {
+
     }
 
     public Vec3d predictPosition(PlayerEntity player) {

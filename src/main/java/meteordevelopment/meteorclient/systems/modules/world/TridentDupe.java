@@ -95,6 +95,11 @@ public class TridentDupe extends Module {
         dupe();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     private void dupe() {
         int delayInt = (int) (delay.get() * 100);
 

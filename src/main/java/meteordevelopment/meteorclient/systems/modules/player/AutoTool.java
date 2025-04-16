@@ -234,6 +234,11 @@ public class AutoTool extends Module {
         return Xray.ORES.contains(block) || block instanceof CropBlock;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public enum EnchantPreference {
         None,
         Fortune,

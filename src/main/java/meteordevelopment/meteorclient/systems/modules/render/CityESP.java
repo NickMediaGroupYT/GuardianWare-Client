@@ -71,4 +71,9 @@ public class CityESP extends Module {
 
         event.renderer.box(target, sideColor.get(), lineColor.get(), shapeMode.get(), 0);
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

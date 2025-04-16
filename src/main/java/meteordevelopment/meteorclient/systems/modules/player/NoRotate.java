@@ -33,4 +33,9 @@ public class NoRotate extends Module {
             }
         }
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

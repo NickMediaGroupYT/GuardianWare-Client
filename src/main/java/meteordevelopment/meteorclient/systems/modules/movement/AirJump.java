@@ -38,6 +38,11 @@ public class AirJump extends Module {
         level = mc.player.getBlockPos().getY();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onKey(KeyEvent event) {
         if (Modules.get().isActive(Freecam.class) || mc.currentScreen != null || mc.player.isOnGround()) return;

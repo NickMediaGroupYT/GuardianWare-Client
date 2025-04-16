@@ -35,4 +35,9 @@ public class EXPThrower extends Module {
             }
         });
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

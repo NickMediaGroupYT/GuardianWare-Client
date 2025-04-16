@@ -33,6 +33,11 @@ public class Sneak extends Module {
         return isActive() && !mc.player.getAbilities().flying && mode.get() == Mode.Vanilla;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public enum Mode {
         Packet,
         Vanilla

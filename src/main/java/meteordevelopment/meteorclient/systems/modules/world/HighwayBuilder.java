@@ -397,6 +397,11 @@ public class HighwayBuilder extends Module {
         }
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     private void errorEarly(String message, Object... args) {
         super.error(message, args);
 

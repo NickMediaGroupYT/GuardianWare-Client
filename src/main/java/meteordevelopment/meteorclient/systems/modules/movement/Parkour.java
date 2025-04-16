@@ -49,4 +49,9 @@ public class Parkour extends Module {
 
         mc.player.jump();
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

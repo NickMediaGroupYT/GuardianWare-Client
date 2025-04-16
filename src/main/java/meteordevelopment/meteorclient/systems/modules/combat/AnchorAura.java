@@ -396,6 +396,11 @@ public class AnchorAura extends Module {
         return EntityUtils.getName(target);
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public enum PlaceMode {
         Above,
         Around,

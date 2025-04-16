@@ -113,6 +113,11 @@ public class AutoEat extends Module {
         if (eating) stopEating();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler(priority = EventPriority.LOW)
     private void onTick(TickEvent.Pre event) {
         // Skip if Auto Gap is already eating

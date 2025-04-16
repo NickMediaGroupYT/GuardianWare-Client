@@ -393,6 +393,11 @@ public class NoRender extends Module {
         if (noCaveCulling.get() || noTextureRotations.get()) mc.worldRenderer.reload();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     // Overlay
 
     public boolean noPortalOverlay() {

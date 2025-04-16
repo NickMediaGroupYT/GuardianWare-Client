@@ -77,6 +77,11 @@ public class EndermanLook extends Module {
         return e > 1.0D - 0.025D / d;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public enum Mode {
         At,
         Away

@@ -264,6 +264,11 @@ public class LogoutSpots extends Module {
         return Integer.toString(players.size());
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     private static final Vector3d pos = new Vector3d();
 
     private class Entry {

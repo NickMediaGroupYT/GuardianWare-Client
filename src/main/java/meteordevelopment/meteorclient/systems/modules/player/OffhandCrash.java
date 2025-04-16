@@ -64,4 +64,9 @@ public class OffhandCrash extends Module {
     public boolean isAntiCrash() {
         return isActive() && antiCrash.get();
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

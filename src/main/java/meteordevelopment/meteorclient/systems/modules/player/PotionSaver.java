@@ -57,4 +57,9 @@ public class PotionSaver extends Module {
     public boolean shouldFreeze(StatusEffect effect) {
         return isActive() && (!onlyWhenStationary.get() || !PlayerUtils.isMoving()) && !mc.player.getStatusEffects().isEmpty() && effects.get().contains(effect);
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

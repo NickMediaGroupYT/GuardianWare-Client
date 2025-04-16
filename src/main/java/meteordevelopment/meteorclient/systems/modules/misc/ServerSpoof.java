@@ -166,4 +166,9 @@ public class ServerSpoof extends Module {
             return null;
         }
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

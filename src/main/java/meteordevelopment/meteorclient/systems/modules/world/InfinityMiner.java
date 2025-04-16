@@ -123,6 +123,11 @@ public class InfinityMiner extends Module {
         baritoneSettings.mineScanDroppedItems.value = prevMineScanDroppedItems;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onTick(TickEvent.Post event) {
         if (isFull()) {

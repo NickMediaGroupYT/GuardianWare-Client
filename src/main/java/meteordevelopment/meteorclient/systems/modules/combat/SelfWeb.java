@@ -84,6 +84,11 @@ public class SelfWeb extends Module {
         if (turnOff.get()) toggle();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public enum Mode {
         Normal,
         Smart

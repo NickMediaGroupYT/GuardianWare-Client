@@ -159,6 +159,11 @@ public class Burrow extends Module {
         Modules.get().get(Timer.class).setOverride(Timer.OFF);
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onTick(TickEvent.Pre event) {
         if (!instant.get()) shouldBurrow = mc.player.getY() > blockPos.getY() + triggerHeight.get();

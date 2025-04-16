@@ -98,6 +98,11 @@ public class AutoArmor extends Module {
         timer = 0;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onPreTick(TickEvent.Pre event) {
         // Wait for timer (delay)

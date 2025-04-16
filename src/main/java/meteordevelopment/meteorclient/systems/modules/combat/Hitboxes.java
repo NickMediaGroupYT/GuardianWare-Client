@@ -63,4 +63,9 @@ public class Hitboxes extends Module {
         if (!onlyOnWeapon.get()) return true;
         return InvUtils.testInHands(itemStack -> itemStack.getItem() instanceof SwordItem || itemStack.getItem() instanceof AxeItem);
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

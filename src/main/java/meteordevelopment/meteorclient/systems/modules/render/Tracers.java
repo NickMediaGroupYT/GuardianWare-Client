@@ -238,7 +238,7 @@ public class Tracers extends Module {
 
     private boolean shouldBeIgnored(Entity entity) {
         boolean normalIgnore = !PlayerUtils.isWithin(entity, maxDist.get()) || (!Modules.get().isActive(Freecam.class) && entity == mc.player) || !entities.get().contains(entity.getType()) || (ignoreSelf.get() && entity == mc.player) || (ignoreFriends.get() && entity instanceof PlayerEntity && Friends.get().isFriend((PlayerEntity) entity)) || (!showInvis.get() && entity.isInvisible()) | !EntityUtils.isInRenderDistance(entity);
-    
+
         if (normalIgnore) {
             return true;
         }
@@ -408,5 +408,10 @@ public class Tracers extends Module {
     @Override
     public String getInfoString() {
         return Integer.toString(count);
+    }
+
+    @Override
+    public void onRender() {
+
     }
 }

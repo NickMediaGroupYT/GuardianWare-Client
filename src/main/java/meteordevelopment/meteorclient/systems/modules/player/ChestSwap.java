@@ -140,6 +140,11 @@ public class ChestSwap extends Module {
         else if (Config.get().chatFeedback.get() && chatFeedback) info("Triggered (highlight)%s(default).", title);
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public enum Chestplate {
         Diamond,
         Netherite,

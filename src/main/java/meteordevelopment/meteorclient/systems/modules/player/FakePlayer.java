@@ -85,4 +85,9 @@ public class FakePlayer extends Module {
     public String getInfoString() {
         return String.valueOf(FakePlayerManager.count());
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

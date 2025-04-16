@@ -211,4 +211,9 @@ public class ItemPhysics extends Module {
     }
 
     record ModelInfo(boolean flat, float offsetY, float offsetZ) {}
+
+    @Override
+    public void onRender() {
+
+    }
 }

@@ -136,6 +136,11 @@ public class BreakIndicators extends Module {
         }
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     private class BlockBreak {
         public BlockPos blockPos;
 

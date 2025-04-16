@@ -151,4 +151,9 @@ public class Speed extends Module {
     public String getInfoString() {
         return currentMode.getHudString();
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

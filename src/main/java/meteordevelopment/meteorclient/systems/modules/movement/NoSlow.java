@@ -90,6 +90,11 @@ public class NoSlow extends Module {
         resetTimer = false;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public boolean airStrict() {
         return isActive() && airStrict.get() && mc.player.isUsingItem();
     }

@@ -27,4 +27,9 @@ public class AutoRespawn extends Module {
         mc.player.requestRespawn();
         event.cancel();
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

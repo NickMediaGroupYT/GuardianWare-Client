@@ -560,6 +560,11 @@ public class ElytraFly extends Module {
         return currentMode.getHudString();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public enum ChestSwapMode {
         Always,
         Never,

@@ -82,4 +82,9 @@ public class BossStack extends Module {
             event.iterator = chosenBarMap.values().iterator();
         }
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

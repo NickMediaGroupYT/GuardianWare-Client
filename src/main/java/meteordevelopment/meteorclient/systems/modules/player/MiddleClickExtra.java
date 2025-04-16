@@ -79,6 +79,11 @@ public class MiddleClickExtra extends Module {
         stopIfUsing(false);
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onMouseButton(MouseButtonEvent event) {
         if (event.action != KeyAction.Press || event.button != GLFW_MOUSE_BUTTON_MIDDLE
@@ -159,7 +164,7 @@ public class MiddleClickExtra extends Module {
             mc.options.useKey.setPressed(true);
             isUsing = true;
         }
-        
+
         event.cancel();
     }
 

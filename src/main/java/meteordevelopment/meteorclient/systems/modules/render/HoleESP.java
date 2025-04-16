@@ -231,6 +231,11 @@ public class HoleESP extends Module {
         for (HoleESP.Hole hole : holes) hole.render(event.renderer, shapeMode.get(), height.get(), topQuad.get(), bottomQuad.get());
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     private static class Hole {
         public BlockPos.Mutable blockPos = new BlockPos.Mutable();
         public byte exclude;

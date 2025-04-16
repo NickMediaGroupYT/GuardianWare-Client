@@ -409,6 +409,11 @@ public class KillAura extends Module {
         return null;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public enum Weapon {
         Sword,
         Axe,

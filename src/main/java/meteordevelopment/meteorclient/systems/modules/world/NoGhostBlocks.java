@@ -52,4 +52,9 @@ public class NoGhostBlocks extends Module {
 
         event.cancel();
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

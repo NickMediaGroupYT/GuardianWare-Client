@@ -167,6 +167,11 @@ public class Criticals extends Module {
         return mode.get().name();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public enum Mode {
         None,
         Packet,

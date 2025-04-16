@@ -207,4 +207,9 @@ public class ForceSwim extends Module {
     public String getInfoString() {
         return EntityUtils.getName(target);
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

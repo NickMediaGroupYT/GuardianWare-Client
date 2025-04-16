@@ -94,7 +94,7 @@ public class SourceFiller extends Module {
 
     @EventHandler
     private void onTick(TickEvent.Pre event) {
-        
+
     }
 
     // Render
@@ -238,4 +238,8 @@ public class SourceFiller extends Module {
                 && blockState.getFluidState().getLevel() == 8;
     }
 
+    @Override
+    public void onRender() {
+
+    }
 }

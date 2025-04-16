@@ -37,4 +37,9 @@ public class CustomFOV extends Module {
     private void onFov(GetFovEvent event) {
         event.fov = FOV.get();
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

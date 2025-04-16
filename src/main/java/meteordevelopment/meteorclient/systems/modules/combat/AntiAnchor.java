@@ -55,4 +55,9 @@ public class AntiAnchor extends Module {
             );
         }
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

@@ -171,6 +171,11 @@ public class Jesus extends Module {
         PathManagers.get().getSettings().getWalkOnLava().set(prePathManagerWalkOnLava);
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onTick(TickEvent.Post event) {
         boolean bubbleColumn = isInBubbleColumn;

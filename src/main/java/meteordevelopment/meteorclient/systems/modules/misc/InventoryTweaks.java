@@ -256,6 +256,11 @@ public class InventoryTweaks extends Module {
         }
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     // Sorting and armour swapping
 
     @EventHandler

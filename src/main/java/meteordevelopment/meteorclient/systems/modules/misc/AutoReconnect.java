@@ -37,6 +37,11 @@ public class AutoReconnect extends Module {
         MeteorClient.EVENT_BUS.subscribe(new StaticListener());
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     private class StaticListener {
         @EventHandler
         private void onGameJoined(ServerConnectBeginEvent event) {

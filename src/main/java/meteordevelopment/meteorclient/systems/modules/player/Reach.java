@@ -41,6 +41,11 @@ public class Reach extends Module {
             "interacting with block entities (chests, furnaces, etc.) or with vehicles. This does not work on paper servers.", Utils.getWindowWidth() / 3.0);
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public double blockReach() {
         return isActive() ? blockReach.get() : 0;
     }

@@ -173,6 +173,11 @@ public class AntiAFK extends Module {
         }
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onTick(TickEvent.Pre event) {
         if (!Utils.canUpdate()) return;

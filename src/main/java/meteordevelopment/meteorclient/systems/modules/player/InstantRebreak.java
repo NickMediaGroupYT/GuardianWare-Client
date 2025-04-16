@@ -94,6 +94,11 @@ public class InstantRebreak extends Module {
         blockPos.set(0, -1, 0);
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onStartBreakingBlock(StartBreakingBlockEvent event) {
         direction = event.direction;

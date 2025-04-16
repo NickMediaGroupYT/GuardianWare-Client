@@ -69,6 +69,11 @@ public class ElytraSpeed extends Module {
     @Override
     public void onDeactivate() {}
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onPacketReceive(PacketEvent.Receive event) {
         if (!isActive())
@@ -96,7 +101,7 @@ public class ElytraSpeed extends Module {
             return;
 
         if (lastMovement == null) {
-            lastMovement = event.movement;   
+            lastMovement = event.movement;
         }
 
         Vec3d direction = new Vec3d(-Math.sin(yaw) * Math.cos(pitch), -Math.sin(pitch),

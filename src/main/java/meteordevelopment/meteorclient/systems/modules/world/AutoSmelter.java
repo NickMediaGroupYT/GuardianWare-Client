@@ -145,4 +145,9 @@ public class AutoSmelter extends Module {
             toggle();
         }
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

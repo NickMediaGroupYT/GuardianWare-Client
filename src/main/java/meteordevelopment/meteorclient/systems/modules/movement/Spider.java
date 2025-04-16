@@ -38,4 +38,9 @@ public class Spider extends Module {
 
         mc.player.setVelocity(velocity.x, speed.get(), velocity.z);
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

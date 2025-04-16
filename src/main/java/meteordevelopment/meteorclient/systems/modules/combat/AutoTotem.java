@@ -209,6 +209,11 @@ public class AutoTotem extends Module {
         }, 9, 35);
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public enum Mode {
         Smart, Strict, None
     }

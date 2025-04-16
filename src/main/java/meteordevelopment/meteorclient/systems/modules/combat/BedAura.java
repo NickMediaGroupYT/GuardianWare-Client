@@ -350,4 +350,9 @@ public class BedAura extends Module {
     public String getInfoString() {
         return EntityUtils.getName(target);
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

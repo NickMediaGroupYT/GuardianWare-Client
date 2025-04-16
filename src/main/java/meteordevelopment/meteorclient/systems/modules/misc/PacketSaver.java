@@ -31,4 +31,9 @@ public class PacketSaver extends Module {
             event.cancel();
         }
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

@@ -99,6 +99,11 @@ public class Pitch40Util extends Module {
         reset();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     private Optional<Setting<Double>> getElytraFlySetting(String name) {
         try {
             return Optional.ofNullable((Setting<Double>) elytraFlyModule.settings.get(name));

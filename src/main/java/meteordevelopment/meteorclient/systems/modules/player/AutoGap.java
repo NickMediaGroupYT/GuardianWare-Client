@@ -130,6 +130,11 @@ public class AutoGap extends Module {
         if (eating) stopEating();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onTick(TickEvent.Pre event) {
         if (eating) {

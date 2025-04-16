@@ -83,6 +83,11 @@ public class AutoReplenish extends Module {
         prevHadOpenScreen = mc.currentScreen != null;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onTick(TickEvent.Pre event) {
         if (mc.currentScreen == null && prevHadOpenScreen) {

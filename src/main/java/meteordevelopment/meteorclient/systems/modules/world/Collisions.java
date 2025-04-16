@@ -115,4 +115,9 @@ public class Collisions extends Module {
     public boolean ignoreBorder() {
         return isActive() && ignoreBorder.get();
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

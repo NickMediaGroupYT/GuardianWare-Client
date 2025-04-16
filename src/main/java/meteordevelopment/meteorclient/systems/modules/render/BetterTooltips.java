@@ -498,6 +498,11 @@ public class BetterTooltips extends Module {
         return false;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public enum DisplayWhen {
         Keybind,
         Always

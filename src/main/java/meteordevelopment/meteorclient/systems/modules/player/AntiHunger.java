@@ -45,6 +45,11 @@ public class AntiHunger extends Module {
         lastOnGround = mc.player.isOnGround();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onSendPacket(PacketEvent.Send event) {
         if (ignorePacket && event.packet instanceof PlayerMoveC2SPacket) {

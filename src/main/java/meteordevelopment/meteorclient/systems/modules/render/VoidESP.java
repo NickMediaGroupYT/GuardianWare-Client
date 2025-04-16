@@ -146,6 +146,11 @@ public class VoidESP extends Module {
         return true;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     private class Void {
         private int x, y, z;
         private int excludeDir;

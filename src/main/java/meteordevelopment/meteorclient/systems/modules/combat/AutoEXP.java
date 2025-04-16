@@ -76,6 +76,11 @@ public class AutoEXP extends Module {
         repairingI = -1;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onTick(TickEvent.Pre event) {
         if (repairingI == -1) {

@@ -234,6 +234,11 @@ public class Chams extends Module {
         PostProcessShaders.CHAMS.init(Utils.titleToName(value.name()));
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public enum Shader {
         Image,
         None

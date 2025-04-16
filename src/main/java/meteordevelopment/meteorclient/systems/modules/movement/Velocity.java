@@ -181,7 +181,7 @@ public class Velocity extends Module {
                         (int) Math.floor(feetBox.minY), (int) Math.floor(feetBox.minZ),
                         (int) Math.floor(feetBox.maxX), (int) Math.floor(feetBox.maxY),
                         (int) Math.floor(feetBox.maxZ))) {
-                    
+
                     if (mc.world.getBlockState(pos).isSolidBlock(mc.world, pos)) {
                         if (RotationManager.lastGround) {
                             isPhased = true;
@@ -193,7 +193,7 @@ public class Velocity extends Module {
                 if (!isPhased) {
                     return;
                 }
-            } 
+            }
 
             double velX = (packet.getVelocityX() / 8000d - mc.player.getVelocity().x) * knockbackHorizontal.get();
             double velY = (packet.getVelocityY() / 8000d - mc.player.getVelocity().y) * knockbackVertical.get();
@@ -210,5 +210,10 @@ public class Velocity extends Module {
 
     public double getVertical(Setting<Double> setting) {
         return isActive() ? setting.get() : 1;
+    }
+
+    @Override
+    public void onRender() {
+
     }
 }

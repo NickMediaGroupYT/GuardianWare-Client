@@ -57,6 +57,11 @@ public class AutoMend extends Module {
         didMove = false;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onTick(TickEvent.Pre event) {
         if (shouldWait()) return;

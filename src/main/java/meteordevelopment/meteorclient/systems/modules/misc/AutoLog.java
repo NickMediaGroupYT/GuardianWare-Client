@@ -232,7 +232,7 @@ public class AutoLog extends Module {
             }
         }
 
-        
+
     }
 
     @EventHandler
@@ -265,6 +265,11 @@ public class AutoLog extends Module {
         }
 
         mc.player.networkHandler.onDisconnect(new DisconnectS2CPacket(text));
+    }
+
+    @Override
+    public void onRender() {
+
     }
 
     private class StaticListener {

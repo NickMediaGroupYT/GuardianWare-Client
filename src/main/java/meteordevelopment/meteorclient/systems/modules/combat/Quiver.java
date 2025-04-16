@@ -160,6 +160,11 @@ public class Quiver extends Module {
         }
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onTick(TickEvent.Pre event) {
         bow = InvUtils.find(Items.BOW);

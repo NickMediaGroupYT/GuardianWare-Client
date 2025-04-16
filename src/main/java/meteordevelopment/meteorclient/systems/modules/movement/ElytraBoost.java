@@ -72,6 +72,11 @@ public class ElytraBoost extends Module {
         fireworks.clear();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onInteractItem(InteractItemEvent event) {
         ItemStack itemStack = mc.player.getStackInHand(event.hand);

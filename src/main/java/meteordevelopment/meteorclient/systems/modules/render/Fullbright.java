@@ -74,6 +74,11 @@ public class Fullbright extends Module {
         else if (mode.get() == Mode.Potion) disableNightVision();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public int getLuminance(LightType type) {
         if (!isActive() || mode.get() != Mode.Luminance || type != lightType.get()) return 0;
         return minimumLightLevel.get();

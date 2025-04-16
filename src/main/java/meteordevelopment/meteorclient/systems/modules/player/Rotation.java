@@ -65,6 +65,11 @@ public class Rotation extends Module {
         onTick(null);
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onTick(TickEvent.Post event) {
         switch (yawLockMode.get()) {

@@ -92,6 +92,11 @@ public class SpeedMine extends Module {
         removeHaste();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onTick(TickEvent.Pre event) {
         if (!Utils.canUpdate()) return;

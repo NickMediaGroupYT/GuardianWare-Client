@@ -190,7 +190,7 @@ public class SwordAura extends Module {
 
         if (!target.isAlive())
             return;
-        
+
         int delayCheckSlot = result.slot();
 
         if (silentSwap.get() && silentSwapOverrideDelay.get()) {
@@ -291,5 +291,10 @@ public class SwordAura extends Module {
         double y = Math.max(box.minY, Math.min(point.y, box.maxY));
         double z = Math.max(box.minZ, Math.min(point.z, box.maxZ));
         return new Vec3d(x, y, z);
+    }
+
+    @Override
+    public void onRender() {
+
     }
 }

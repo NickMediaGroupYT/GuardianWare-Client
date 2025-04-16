@@ -49,4 +49,9 @@ public class GhostHand extends Module {
             }
         }
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

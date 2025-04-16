@@ -136,6 +136,11 @@ public class AutoEnchant extends Module {
         }
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onPacket(PacketEvent.Receive event) {
         // I think this will catch when a player rejoins so we don't immediately start trying to enchant

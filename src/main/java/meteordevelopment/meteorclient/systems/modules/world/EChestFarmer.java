@@ -118,6 +118,11 @@ public class EChestFarmer extends Module {
         InvUtils.swapBack();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onTick(TickEvent.Pre event) {
         // Finding target pos

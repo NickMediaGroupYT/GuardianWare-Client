@@ -42,4 +42,9 @@ public class TridentBoost extends Module {
     public boolean allowOutOfWater() {
         return isActive() ? allowOutOfWater.get() : false;
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

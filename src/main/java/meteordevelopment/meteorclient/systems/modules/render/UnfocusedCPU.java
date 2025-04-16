@@ -26,4 +26,9 @@ public class UnfocusedCPU extends Module {
     public UnfocusedCPU() {
         super(Categories.Render, "unfocused-cpu", "Limits FPS when your Minecraft window is not focused.");
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

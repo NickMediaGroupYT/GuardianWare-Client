@@ -67,6 +67,11 @@ public class AFKVanillaFly extends Module {
         }
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     // this method is now then default logic, it did not need to be called in TrailFollower
     public void tickFlyLogic() {
         if (mc.player == null) return;

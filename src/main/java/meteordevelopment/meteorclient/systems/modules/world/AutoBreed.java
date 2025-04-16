@@ -68,6 +68,11 @@ public class AutoBreed extends Module {
         animalsFed.clear();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onTick(TickEvent.Pre event) {
         for (Entity entity : mc.world.getEntities()) {

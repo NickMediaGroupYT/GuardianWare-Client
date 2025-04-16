@@ -202,6 +202,11 @@ public class WaypointsModule extends Module {
         return table;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     private void initTable(GuiTheme theme, WTable table) {
         table.clear();
 

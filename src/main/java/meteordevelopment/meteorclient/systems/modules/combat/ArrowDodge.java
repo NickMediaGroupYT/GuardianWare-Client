@@ -188,6 +188,11 @@ public class ArrowDodge extends Module {
         return true;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public enum MoveType {
         Velocity,
         Packet

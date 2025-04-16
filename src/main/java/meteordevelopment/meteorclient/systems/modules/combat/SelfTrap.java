@@ -139,6 +139,11 @@ public class SelfTrap extends Module {
         if (center.get()) PlayerUtils.centerPlayer();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onTick(TickEvent.Pre event) {
         for (Block currentBlock : blocks.get()) {

@@ -85,6 +85,11 @@ public class Zoom extends Module {
         }
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public void onStop() {
         mc.options.smoothCameraEnabled = preCinematic;
         mc.options.getMouseSensitivity().setValue(preMouseSensitivity);

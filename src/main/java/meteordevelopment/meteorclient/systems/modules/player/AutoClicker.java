@@ -72,6 +72,11 @@ public class AutoClicker extends Module {
         mc.options.useKey.setPressed(false);
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onTick(TickEvent.Post event) {
         switch (leftClickMode.get()) {

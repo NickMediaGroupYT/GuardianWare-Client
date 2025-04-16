@@ -37,4 +37,9 @@ public class Timer extends Module {
     public void setOverride(double override) {
         this.override = override;
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

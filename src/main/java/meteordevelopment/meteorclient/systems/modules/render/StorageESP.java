@@ -330,6 +330,11 @@ public class StorageESP extends Module {
         return Integer.toString(count);
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public boolean isShader() {
         return isActive() && mode.get() == Mode.Shader;
     }

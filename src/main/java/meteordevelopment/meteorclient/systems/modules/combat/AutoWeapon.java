@@ -84,6 +84,11 @@ public class AutoWeapon extends Module {
         else return mc.player.getInventory().selectedSlot;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public enum Weapon {
         Sword,
         Axe

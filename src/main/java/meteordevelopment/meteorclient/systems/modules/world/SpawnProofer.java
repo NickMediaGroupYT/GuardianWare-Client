@@ -177,6 +177,11 @@ public class SpawnProofer extends Module {
         return block.getDefaultState().getLuminance() > 0;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public enum Mode {
         Always,
         Potential,

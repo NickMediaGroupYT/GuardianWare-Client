@@ -74,6 +74,11 @@ public class Sprint extends Module {
         mc.player.setSprinting(false);
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onTickMovement(TickEvent.Post event) {
         if (shouldSprint()) mc.player.setSprinting(true);

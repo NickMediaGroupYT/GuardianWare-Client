@@ -5,101 +5,97 @@
 
 package meteordevelopment.meteorclient.systems.modules.world;
 
-import meteordevelopment.meteorclient.settings.BoolSetting;
-import meteordevelopment.meteorclient.settings.Setting;
-import meteordevelopment.meteorclient.settings.SettingGroup;
-import meteordevelopment.meteorclient.settings.StringSetting;
 import meteordevelopment.meteorclient.systems.modules.Categories;
 import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.orbit.EventHandler;
-import xaeroplus.XaeroPlus;
-import xaeroplus.event.ChunkDataEvent;
-import xaeroplus.module.ModuleManager;
-import xaeroplus.module.impl.OldChunks;
-import xaeroplus.module.impl.PaletteNewChunks;
+import meteordevelopment.meteorclient.utils.render.RenderUtils;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.text.Text;
+import net.minecraft.util.math.BlockPos;
 
-import static meteordevelopment.meteorclient.utils.misc.PathSeekerUtil.sendWebhook;
-
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.HashSet;
+import java.util.Set;
 
 public class TrailFinder extends Module {
 
-    private final SettingGroup sgGeneral = settings.getDefaultGroup();
+    private static final MinecraftClient client = MinecraftClient.getInstance();
+    private Set<BlockPos> visitedChunks = new HashSet<>();  // To store visited chunk coordinates
 
-    public final Setting<String> webhookLink = sgGeneral.add(new StringSetting.Builder()
-        .name("Webhook Link")
-        .description("A discord webhook link. Looks like this: https://discord.com/api/webhooks/webhookUserId/webHookTokenOrSomething")
-        .defaultValue("")
-        .build()
-    );
-
-    public final Setting<Boolean> ping = sgGeneral.add(new BoolSetting.Builder()
-        .name("Ping")
-        .description("Whether to ping you or not.")
-        .defaultValue(false)
-        .build()
-    );
-
-    public final Setting<String> discordId = sgGeneral.add(new StringSetting.Builder()
-        .name("Discord ID")
-        .description("Your discord ID")
-        .defaultValue("")
-        .visible(ping::get)
-        .build()
-    );
+    // The Webhook URL where we will send the chunk coordinates
+    private final String webhookUrl = "YOUR_WEBHOOK_URL";  // Replace with your actual webhook URL
 
     public TrailFinder() {
-        super(Categories.World, "TrailFinder", "Sends a webhook message and optionally pings you when an old chunk is detected.");
+        super(Categories.World, "TrailFinder", "Sends visited chunk coordinates to a webhook");
     }
 
     @Override
-    public void onActivate()
-    {
-        XaeroPlus.EVENT_BUS.register(this);
+    public void onActivate() {
+        super.onActivate();
+        visitedChunks.clear();  // Clear trail when module is activated
     }
 
     @Override
-    public void onDeactivate()
-    {
-        XaeroPlus.EVENT_BUS.unregister(this);
-    }
+    public void onRender() {
+        if (client.player == null) return;
 
-    @EventHandler
-    public void onChunkData(ChunkDataEvent event)
-    {
-        // avoid 2b2t end loading screen
-        if (mc.player.getAbilities().allowFlying) return;
+        BlockPos playerPos = client.player.getBlockPos();
 
-        if (webhookLink.get().isEmpty()) return;
-        boolean is119NewChunk = ModuleManager.getModule(PaletteNewChunks.class)
-            .isNewChunk(
-                event.chunk().getPos().x,
-                event.chunk().getPos().z,
-                event.chunk().getWorld().getRegistryKey()
-            );
+        // Get the current chunk coordinates based on player's position
+        int chunkX = playerPos.getX() >> 4;
+        int chunkZ = playerPos.getZ() >> 4;
+        BlockPos currentChunk = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
-        boolean is112OldChunk = ModuleManager.getModule(OldChunks.class)
-            .isOldChunk(
-                event.chunk().getPos().x,
-                event.chunk().getPos().z,
-                event.chunk().getWorld().getRegistryKey()
-            );
-
-        if (is119NewChunk && !is112OldChunk) return;
-
-        String message = "";
-
-        if (is112OldChunk && !is119NewChunk) {
-            message = "1.12 Followed in 1.19+ Old Chunk Detected";
-        } else if (is112OldChunk && is119NewChunk) {
-            message = "1.12 Unfollowed in 1.19+ Old Chunk Detected";
-        } else {
-            message = "1.19+ Old Chunk Detected";
+        // If the player has entered a new chunk, add it to the visited chunks
+        if (!visitedChunks.contains(currentChunk)) {
+            visitedChunks.add(currentChunk);
+            sendChunkToWebhook(currentChunk);  // Send the chunk data to the webhook
         }
-        String finalMessage = message;
-        // use threads so if a ton of chunks come at once it doesnt lag the game
-        String discordID = discordId.get().isBlank() ? null : discordId.get();
-        new Thread(() -> sendWebhook(webhookLink.get(), "Old Chunk Detected", finalMessage + " at " + mc.player.getPos().toString(), discordID, mc.player.getGameProfile().getName())).start();
 
+        // Render outlines for all visited chunks
+        for (BlockPos chunk : visitedChunks) {
+            RenderUtils.renderOutline(chunk, 16, 0, 16, 0, 255, 0); // Green outline for trail
+        }
     }
 
+    /**
+     * Sends the chunk coordinates to the webhook.
+     * @param chunk The chunk coordinates to send.
+     */
+    private void sendChunkToWebhook(BlockPos chunk) {
+        // Prepare the JSON payload
+        String jsonPayload = String.format("{\"chunk\": {\"x\": %d, \"z\": %d}}", chunk.getX() >> 4, chunk.getZ() >> 4);
+
+        try {
+            // Create a URL object for the webhook
+            URL url = new URL(webhookUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setDoOutput(true);
+
+            // Send the JSON payload to the webhook
+            try (OutputStream os = connection.getOutputStream()) {
+                byte[] input = jsonPayload.getBytes(StandardCharsets.UTF_8);
+                os.write(input, 0, input.length);
+            }
+
+            // Get the response code to verify success or failure
+            int responseCode = connection.getResponseCode();
+            if (responseCode != HttpURLConnection.HTTP_OK) {
+                // Log the error if the request failed
+                client.player.sendMessage(Text.of("Failed to send chunk data to webhook (HTTP " + responseCode + ")"), false);
+            } else {
+                // Success (optional, you can log a success message here if you want)
+                // client.player.sendMessage("Sent chunk data to webhook!", false);
+            }
+
+        } catch (Exception e) {
+            // Log any exceptions that occur
+            e.printStackTrace();
+            client.player.sendMessage(Text.of("Failed to send chunk data to webhook"), false);
+        }
+    }
 }

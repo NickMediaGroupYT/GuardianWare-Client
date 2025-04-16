@@ -164,7 +164,7 @@ public class PearlPhase extends Module {
         // Instant: Instantly sends a movement packet with the rotation
         // DelayedInstant: Requests a rotation from the RotationManager and waits for it to be fulfilled, then sends a movement packet with the rotation
         // DelayedInstantWebOnly: Same as DelayedInstant, but only sends a movement packet when in webs
-        
+
         // Movement fails in webs on Grim,
         // instant is a bit iffy since it doesn't work when you rubberband
 
@@ -172,7 +172,7 @@ public class PearlPhase extends Module {
         switch (rotateMode.get()) {
             case Movement -> {
                 MeteorClient.ROTATION.requestRotation(targetPos, 1000f);
-        
+
                 if (MeteorClient.ROTATION.lookingAt(Box.of(targetPos, 0.05, 0.05, 0.05))) {
                     throwPearl(angle[0], angle[1]);
                 }
@@ -180,13 +180,13 @@ public class PearlPhase extends Module {
             case Instant -> {
                 if (mc.player.isOnGround()) {
                     MeteorClient.ROTATION.snapAt(targetPos);
-                    
+
                     throwPearl(angle[0], angle[1]);
                 }
             }
             case DelayedInstant -> {
                 MeteorClient.ROTATION.requestRotation(targetPos, 1000f);
-        
+
                 if (MeteorClient.ROTATION.lookingAt(Box.of(targetPos, 0.05, 0.05, 0.05))) {
                     MeteorClient.ROTATION.snapAt(targetPos);
 
@@ -195,7 +195,7 @@ public class PearlPhase extends Module {
             }
             case DelayedInstantWebOnly -> {
                 MeteorClient.ROTATION.requestRotation(targetPos, 1000f);
-        
+
                 if (MeteorClient.ROTATION.lookingAt(Box.of(targetPos, 0.05, 0.05, 0.05))) {
                     if (MovementFix.inWebs) {
                         MeteorClient.ROTATION.snapAt(targetPos);
@@ -285,6 +285,11 @@ public class PearlPhase extends Module {
         } else {
             return max;
         }
+    }
+
+    @Override
+    public void onRender() {
+
     }
 
     public enum SwitchMode {

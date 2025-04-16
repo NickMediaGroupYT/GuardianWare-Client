@@ -41,4 +41,9 @@ public class ItemHighlight extends Module {
         if (stack != null && items.get().contains(stack.getItem()) && isActive()) return color.get().getPacked();
         return -1;
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

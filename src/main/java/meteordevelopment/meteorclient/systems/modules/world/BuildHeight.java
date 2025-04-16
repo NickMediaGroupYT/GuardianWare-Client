@@ -26,4 +26,9 @@ public class BuildHeight extends Module {
             ((BlockHitResultAccessor) p.getBlockHitResult()).setSide(Direction.DOWN);
         }
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

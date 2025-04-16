@@ -61,4 +61,9 @@ public class EntitySpeed extends Module {
         Vec3d vel = PlayerUtils.getHorizontalVelocity(speed.get());
         ((IVec3d) event.movement).setXZ(vel.x, vel.z);
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

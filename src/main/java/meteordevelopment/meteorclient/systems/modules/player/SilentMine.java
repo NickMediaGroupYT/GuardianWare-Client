@@ -104,6 +104,11 @@ public class SilentMine extends Module {
 
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onTick(TickEvent.Pre event) {
         currentGameTickCalculated = RenderUtils.getCurrentGameTickCalculated();

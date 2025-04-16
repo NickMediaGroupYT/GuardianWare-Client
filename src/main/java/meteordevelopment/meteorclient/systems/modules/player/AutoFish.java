@@ -102,6 +102,11 @@ public class AutoFish extends Module {
         autoCastCheckTimer = 0;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onPlaySound(PlaySoundEvent event) {
         SoundInstance p = event.sound;

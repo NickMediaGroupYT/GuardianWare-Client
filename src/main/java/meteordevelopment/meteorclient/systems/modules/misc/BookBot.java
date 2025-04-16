@@ -345,6 +345,11 @@ public class BookBot extends Module {
         return super.fromTag(tag);
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public enum Mode {
         File,
         Random

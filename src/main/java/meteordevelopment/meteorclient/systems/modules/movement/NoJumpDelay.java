@@ -16,4 +16,9 @@ public class NoJumpDelay extends Module {
         // Can't access it normally  so use LivingEntityAccessor
         ((LivingEntityAccessor) mc.player).setJumpCooldown(0);
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

@@ -5,6 +5,7 @@
 
 package meteordevelopment.meteorclient.utils.render;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import meteordevelopment.meteorclient.MeteorClient;
 import meteordevelopment.meteorclient.events.render.Render3DEvent;
 import meteordevelopment.meteorclient.events.world.TickEvent;
@@ -15,6 +16,7 @@ import meteordevelopment.meteorclient.utils.render.color.Color;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -23,6 +25,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
+import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
 import java.util.ArrayList;
@@ -186,7 +189,7 @@ public class RenderUtils {
             lineColor.a = preLineA;
         }
     }
-    
+
     public static double getCurrentGameTickCalculated() {
         return getCurrentGameTickCalculatedNano(System.nanoTime());
     }
@@ -194,6 +197,63 @@ public class RenderUtils {
     public static double getCurrentGameTickCalculatedNano(long nanoTime) {
         return (double) (nanoTime - initTime)
                 / (double) (java.util.concurrent.TimeUnit.MILLISECONDS.toNanos(50L));
+    }
+
+    public static void renderOutline(BlockPos pos, int width, int height, int depth, int r, int g, int b) {
+        MatrixStack matrixStack = new MatrixStack();
+
+        // Prepare the outline rendering
+        //RenderSystem.pushMatrix();
+        RenderSystem.enableBlend();
+        RenderSystem.defaultBlendFunc();
+        //RenderSystem.disableTexture();
+        //RenderSystem.enableLineSmooth();
+        RenderSystem.lineWidth(2.0F); // Set line width for outline
+
+        // Set the color for the outline
+        float red = r / 255.0F;
+        float green = g / 255.0F;
+        float blue = b / 255.0F;
+        RenderSystem.setShaderColor(red, green, blue, 1.0F);
+
+        // Get the model view matrix and apply the transformations
+        Matrix4f matrix = matrixStack.peek().getPositionMatrix();
+
+        // Begin drawing the outline
+        Tessellator buffer = Tessellator.getInstance();
+        ((Tessellator) buffer).begin(null, null);
+
+        // Draw the outline (this draws lines around the edges of a cubic area)
+        // Front Face
+        addLine(buffer, matrix, pos.getX(), pos.getY(), pos.getZ(), pos.getX() + width, pos.getY(), pos.getZ());
+        addLine(buffer, matrix, pos.getX() + width, pos.getY(), pos.getZ(), pos.getX() + width, pos.getY() + height, pos.getZ());
+        addLine(buffer, matrix, pos.getX() + width, pos.getY() + height, pos.getZ(), pos.getX(), pos.getY() + height, pos.getZ());
+        addLine(buffer, matrix, pos.getX(), pos.getY() + height, pos.getZ(), pos.getX(), pos.getY(), pos.getZ());
+
+        // Back Face
+        addLine(buffer, matrix, pos.getX(), pos.getY(), pos.getZ() + depth, pos.getX() + width, pos.getY(), pos.getZ() + depth);
+        addLine(buffer, matrix, pos.getX() + width, pos.getY(), pos.getZ() + depth, pos.getX() + width, pos.getY() + height, pos.getZ() + depth);
+        addLine(buffer, matrix, pos.getX() + width, pos.getY() + height, pos.getZ() + depth, pos.getX(), pos.getY() + height, pos.getZ() + depth);
+        addLine(buffer, matrix, pos.getX(), pos.getY() + height, pos.getZ() + depth, pos.getX(), pos.getY(), pos.getZ() + depth);
+
+        // Connecting Front and Back Faces
+        addLine(buffer, matrix, pos.getX(), pos.getY(), pos.getZ(), pos.getX(), pos.getY(), pos.getZ() + depth);
+        addLine(buffer, matrix, pos.getX() + width, pos.getY(), pos.getZ(), pos.getX() + width, pos.getY(), pos.getZ() + depth);
+        addLine(buffer, matrix, pos.getX() + width, pos.getY() + height, pos.getZ(), pos.getX() + width, pos.getY() + height, pos.getZ() + depth);
+        addLine(buffer, matrix, pos.getX(), pos.getY() + height, pos.getZ(), pos.getX(), pos.getY() + height, pos.getZ() + depth);
+
+        // Render the lines
+        //Tessellator.getInstance().draw();
+
+        // Reset OpenGL settings
+        //RenderSystem.enableTexture();
+        RenderSystem.disableBlend();
+        //RenderSystem.popMatrix();
+    }
+
+    private static void addLine(Tessellator buffer, Matrix4f matrix, float x1, float y1, float z1, float x2, float y2, float z2) {
+        //buffer.vertex(matrix, x1, y1, z1).next();
+        //buffer.vertex(matrix, x2, y2, z2).next();
     }
 }
 

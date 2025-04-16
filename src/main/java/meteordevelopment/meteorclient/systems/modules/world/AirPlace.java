@@ -126,4 +126,9 @@ public class AirPlace extends Module {
 
         event.renderer.box(blockHitResult.getBlockPos(), sideColor.get(), lineColor.get(), shapeMode.get(), 0);
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

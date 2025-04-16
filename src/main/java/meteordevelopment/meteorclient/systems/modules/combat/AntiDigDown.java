@@ -142,7 +142,7 @@ public class AntiDigDown extends Module {
                     && belowPos.equals(silentMine.getDelayedDestroyBlockPos()))
                     || (silentMine.getRebreakBlockPos() != null
                             && belowPos.equals(silentMine.getRebreakBlockPos()))) {
-                return;     
+                return;
             }
 
             if (packet.getPos().equals(belowPos) && packet.getState().isAir()) {
@@ -183,5 +183,10 @@ public class AntiDigDown extends Module {
     @Override
     public String getInfoString() {
         return EntityUtils.getName(target);
+    }
+
+    @Override
+    public void onRender() {
+
     }
 }

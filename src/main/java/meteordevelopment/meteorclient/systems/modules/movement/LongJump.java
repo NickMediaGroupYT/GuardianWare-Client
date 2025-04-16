@@ -134,6 +134,11 @@ public class LongJump extends Module {
         Modules.get().get(Timer.class).setOverride(Timer.OFF);
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onPacketReceive(PacketEvent.Receive event) {
         if (event.packet instanceof PlayerPositionLookS2CPacket && disableOnRubberband.get()) {

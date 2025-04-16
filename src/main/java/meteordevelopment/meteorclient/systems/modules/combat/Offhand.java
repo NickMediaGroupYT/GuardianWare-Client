@@ -233,6 +233,11 @@ public class Offhand extends Module {
         return preferreditem.get().name();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public enum Item {
         // Items the module could put on your offhand
         EGap(Items.ENCHANTED_GOLDEN_APPLE), Gap(Items.GOLDEN_APPLE), Crystal(

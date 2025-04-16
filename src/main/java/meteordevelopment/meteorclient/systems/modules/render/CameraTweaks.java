@@ -74,6 +74,11 @@ public class CameraTweaks extends Module {
         distance = cameraDistance.get();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onPerspectiveChanged(ChangePerspectiveEvent event) {
         distance = cameraDistance.get();

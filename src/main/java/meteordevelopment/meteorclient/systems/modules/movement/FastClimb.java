@@ -60,6 +60,11 @@ public class FastClimb extends Module {
         resetTimer = false;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onPreTick(TickEvent.Pre event) {
         if (timerMode.get()) {

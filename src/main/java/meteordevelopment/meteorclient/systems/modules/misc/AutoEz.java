@@ -297,6 +297,11 @@ public class AutoEz extends Module {
         return killMsgMode.get().name();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler(priority = EventPriority.HIGHEST)
     private void onTick(TickEvent.Pre event) {
         timer++;

@@ -1011,7 +1011,7 @@ public class AutoCrystal extends Module {
         event.renderer.box(x1, y1, z1, x2, y2, z2, sideColor.copy().a((int) (sideColor.a * alpha)),
                 sideColor.copy().a((int) (lineColor.a * alpha)), shapeMode, 0);
     }
-    
+
     private boolean intersectsWithEntities(Box box) {
         return intersectsWithEntity(box,
                 entity -> !entity.isSpectator() && !explodedCrystals.contains(entity.getId()));
@@ -1124,6 +1124,11 @@ public class AutoCrystal extends Module {
         long currentTime = System.currentTimeMillis();
         return String.format("%d",
                 crystalBreakDelays.values().stream().filter(x -> currentTime - x <= 1000).count());
+    }
+
+    @Override
+    public void onRender() {
+
     }
 
     private class PlacePosition {

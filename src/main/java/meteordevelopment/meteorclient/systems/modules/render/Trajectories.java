@@ -220,6 +220,11 @@ public class Trajectories extends Module {
         }
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     private class Path {
         private final List<Vector3d> points = new ArrayList<>();
 

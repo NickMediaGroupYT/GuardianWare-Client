@@ -110,6 +110,11 @@ public class Flight extends Module {
         }
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onPreTick(TickEvent.Pre event) {
         float currentYaw = mc.player.getYaw();

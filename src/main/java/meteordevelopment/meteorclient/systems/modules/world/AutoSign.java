@@ -27,6 +27,11 @@ public class AutoSign extends Module {
         text = null;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onSendPacket(PacketEvent.Send event) {
         if (!(event.packet instanceof UpdateSignC2SPacket)) return;

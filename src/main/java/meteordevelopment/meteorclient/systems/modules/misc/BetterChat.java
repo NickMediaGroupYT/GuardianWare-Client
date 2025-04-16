@@ -575,4 +575,9 @@ public class BetterChat extends Module {
     public int getExtraChatLines() {
         return longerChatLines.get();
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

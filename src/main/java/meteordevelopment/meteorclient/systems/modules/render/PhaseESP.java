@@ -175,6 +175,11 @@ public class PhaseESP extends Module {
         }
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     private class PhaseBlock {
         public BlockPos.Mutable blockPos = new BlockPos.Mutable();
         public Type type;

@@ -148,4 +148,9 @@ public class StackedMinecartsDetector extends Module {
     public Map<BlockPos, Integer> getStackedPositions() {
         return Collections.unmodifiableMap(stackedPositions);
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

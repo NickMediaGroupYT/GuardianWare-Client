@@ -44,4 +44,9 @@ public class NoMiningTrace extends Module {
         return (!onlyWhenHoldingPickaxe.get() || mc.player.getMainHandStack().getItem() instanceof PickaxeItem || mc.player.getOffHandStack().getItem() instanceof PickaxeItem) &&
             (entity == null || !entities.get().contains(entity.getType()));
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

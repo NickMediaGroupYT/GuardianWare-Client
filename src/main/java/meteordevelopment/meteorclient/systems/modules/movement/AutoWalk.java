@@ -65,6 +65,11 @@ public class AutoWalk extends Module {
         else PathManagers.get().stop();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler(priority = EventPriority.HIGH)
     private void onTick(TickEvent.Pre event) {
         if (mode.get() == Mode.Simple) {

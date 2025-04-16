@@ -280,6 +280,11 @@ public class Nuker extends Module {
         noBlockTimer = 0;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onRender(Render3DEvent event) {
         if (enableRenderBounding.get()) {

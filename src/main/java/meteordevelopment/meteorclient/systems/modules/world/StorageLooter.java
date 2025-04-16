@@ -369,6 +369,11 @@ public class StorageLooter extends Module {
         resetValues();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     private void resetValues() {
         inventoryFullErrorSent = false;
         ticks = 0;

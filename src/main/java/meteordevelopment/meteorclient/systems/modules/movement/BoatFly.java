@@ -86,4 +86,9 @@ public class BoatFly extends Module {
             event.cancel();
         }
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

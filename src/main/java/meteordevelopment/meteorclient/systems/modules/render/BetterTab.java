@@ -128,4 +128,9 @@ public class BetterTab extends Module {
 
         return true;
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

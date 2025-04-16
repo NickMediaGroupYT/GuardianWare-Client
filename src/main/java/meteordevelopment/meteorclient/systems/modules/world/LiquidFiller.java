@@ -128,6 +128,11 @@ public class LiquidFiller extends Module {
         timer = 0;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onTick(TickEvent.Pre event) {
         // Update timer according to delay

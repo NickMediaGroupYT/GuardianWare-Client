@@ -226,4 +226,9 @@ public class Blur extends Module {
 
         return false;
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

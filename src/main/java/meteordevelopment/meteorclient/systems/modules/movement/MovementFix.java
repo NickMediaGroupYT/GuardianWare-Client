@@ -47,7 +47,7 @@ public class MovementFix extends Module {
     public static float prevYaw;
     public static float prevPitch;
 
-    public static boolean setRot = false; 
+    public static boolean setRot = false;
 
     private boolean preJumpSprint = false;
 
@@ -142,6 +142,11 @@ public class MovementFix extends Module {
         float sin = MathHelper.sin(delta);
         mc.player.input.movementSideways = Math.round(mS * cos - mF * sin);
         mc.player.input.movementForward = Math.round(mF * cos + mS * sin);
+    }
+
+    @Override
+    public void onRender() {
+
     }
 
     public enum UpdateMode {

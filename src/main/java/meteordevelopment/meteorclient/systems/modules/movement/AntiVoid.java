@@ -44,6 +44,11 @@ public class AntiVoid extends Module {
         }
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onPreTick(TickEvent.Pre event) {
         int minY = mc.world.getBottomY();

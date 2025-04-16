@@ -28,4 +28,9 @@ public class Multitask extends Module {
     public boolean attackingEntities() {
         return isActive() && attackingEntities.get();
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

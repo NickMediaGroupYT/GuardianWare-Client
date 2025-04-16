@@ -277,6 +277,11 @@ public class Notebot extends Module {
     }
 
     @Override
+    public void onRender() {
+
+    }
+
+    @Override
     public void onActivate() {
         ticks = 0;
         resetVariables();

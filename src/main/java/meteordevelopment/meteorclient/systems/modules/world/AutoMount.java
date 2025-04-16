@@ -79,4 +79,9 @@ public class AutoMount extends Module {
         if (rotate.get()) Rotations.rotate(Rotations.getYaw(entity), Rotations.getPitch(entity), -100, () -> mc.interactionManager.interactEntity(mc.player, entity, Hand.MAIN_HAND));
         else mc.interactionManager.interactEntity(mc.player, entity, Hand.MAIN_HAND);
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

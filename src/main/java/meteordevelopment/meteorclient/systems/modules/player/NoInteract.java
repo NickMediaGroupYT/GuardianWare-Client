@@ -234,6 +234,11 @@ public class NoInteract extends Module {
             entityInteract.get().contains(entity.getType());
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public enum HandMode {
         Mainhand,
         Offhand,

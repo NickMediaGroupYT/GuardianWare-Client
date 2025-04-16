@@ -166,6 +166,11 @@ public class AutoPortal extends Module {
         delay = 0;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onTick(TickEvent.Post event) {
         if (mc.player == null || mc.world == null) return;

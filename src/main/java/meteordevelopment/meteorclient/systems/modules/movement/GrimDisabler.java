@@ -97,6 +97,11 @@ public class GrimDisabler extends Module {
         return String.format("%s", horizontalDisblerMode.get().toString());
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public enum HorizontalDisablerMode {
         None, YawOverflow
     }

@@ -61,6 +61,11 @@ public class AutoJump extends Module {
         else ((IVec3d) mc.player.getVelocity()).setY(velocityHeight.get());
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public enum JumpWhen {
         Sprinting,
         Walking,

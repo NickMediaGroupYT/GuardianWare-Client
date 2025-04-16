@@ -90,6 +90,11 @@ public class Marker extends Module {
     }
 
     @Override
+    public void onRender() {
+
+    }
+
+    @Override
     public WWidget getWidget(GuiTheme theme) {
         WVerticalList list = theme.verticalList();
         fillList(theme, list);

@@ -173,6 +173,11 @@ public class Freecam extends Module {
         }
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onOpenScreen(OpenScreenEvent event) {
         unpress();

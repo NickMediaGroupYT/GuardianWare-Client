@@ -43,6 +43,11 @@ public class AutoBrewer extends Module {
         first = false;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public void onBrewingStandClose() {
         first = false;
     }

@@ -88,6 +88,11 @@ public class Step extends Module {
         PathManagers.get().getSettings().getStep().set(prevPathManagerStep);
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     private float getHealth(){
         return mc.player.getHealth() + mc.player.getAbsorptionAmount();
     }

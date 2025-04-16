@@ -120,6 +120,11 @@ public class LightOverlay extends Module {
         );
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     private class Cross {
         private double x, y, z;
         private boolean potential;

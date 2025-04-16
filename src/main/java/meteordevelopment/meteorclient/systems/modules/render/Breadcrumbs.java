@@ -71,6 +71,11 @@ public class Breadcrumbs extends Module {
         sections.clear();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onTick(TickEvent.Post event) {
         if (lastDimension != mc.world.getDimension()) {

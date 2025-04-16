@@ -176,6 +176,11 @@ public class Ambience extends Module {
         reload();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     private void reload() {
         if (mc.worldRenderer != null && isActive()) mc.worldRenderer.reload();
     }

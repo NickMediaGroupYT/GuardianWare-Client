@@ -124,6 +124,11 @@ public class Spam extends Module {
         splitNum = 0;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onScreenOpen(OpenScreenEvent event) {
         if (disableOnDisconnect.get() && event.screen instanceof DisconnectedScreen) {

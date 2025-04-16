@@ -231,6 +231,11 @@ public class HandView extends Module {
         return isActive() && disableFoodAnimation.get();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public enum SwingMode {
         Offhand,
         Mainhand,

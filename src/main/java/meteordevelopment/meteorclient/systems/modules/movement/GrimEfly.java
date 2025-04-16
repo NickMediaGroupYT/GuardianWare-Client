@@ -159,6 +159,11 @@ public class GrimEfly extends Module {
         setPressed(mc.options.forwardKey, startForwards);
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
 
     @EventHandler
     private void onTick(TickEvent.Pre event) {

@@ -92,6 +92,11 @@ public class Excavator extends Module {
         status = Status.SEL_START;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onMouseButton(MouseButtonEvent event) {
         if (event.action != KeyAction.Press || !selectionBind.get().isPressed() || mc.currentScreen != null) {

@@ -282,6 +282,11 @@ public class Notifier extends Module {
         messageQueue.clear();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onGameJoin(GameJoinedEvent event) {
         timer = 0;
@@ -353,7 +358,7 @@ public class Notifier extends Module {
         }
     }
 
-    @EventHandler 
+    @EventHandler
     private void onPlayerLeave(PlayerJoinLeaveEvent.Leave event) {
         if (joinsLeavesMode.get().equals(JoinLeaveModes.None) || joinsLeavesMode.get().equals(JoinLeaveModes.Joins)) return;
 

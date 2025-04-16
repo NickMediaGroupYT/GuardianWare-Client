@@ -273,6 +273,11 @@ public class StashFinder extends Module {
         return String.valueOf(chunks.size());
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public enum Mode {
         Chat,
         Toast,

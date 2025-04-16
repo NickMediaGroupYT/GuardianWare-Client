@@ -81,6 +81,11 @@ public class Anchor extends Module {
         holeX = holeZ = 0;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onPreTick(TickEvent.Pre event) {
         cancelJump = foundHole && cancelMove.get() && mc.player.getPitch() >= minPitch.get();

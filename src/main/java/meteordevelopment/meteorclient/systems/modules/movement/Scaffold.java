@@ -319,6 +319,11 @@ public class Scaffold extends Module {
         return false;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public enum ListMode {
         Whitelist,
         Blacklist

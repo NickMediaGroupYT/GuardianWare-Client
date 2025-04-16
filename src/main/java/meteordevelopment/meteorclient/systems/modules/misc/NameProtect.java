@@ -48,6 +48,11 @@ public class NameProtect extends Module {
         username = mc.getSession().getUsername();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     public String replaceName(String string) {
         if (string != null && isActive()) {
             return string.replace(username, name.get());

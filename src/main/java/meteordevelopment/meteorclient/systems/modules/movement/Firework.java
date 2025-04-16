@@ -12,7 +12,6 @@ import meteordevelopment.meteorclient.settings.Setting;
 import meteordevelopment.meteorclient.settings.SettingGroup;
 import meteordevelopment.meteorclient.systems.modules.Categories;
 import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.meteorclient.systems.modules.Modules;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
@@ -166,5 +165,10 @@ public class Firework extends Module {
         isBoostActive = false;
         boostTicks = 0;
         ticksSinceLastUse = 0;
+    }
+
+    @Override
+    public void onRender() {
+
     }
 }

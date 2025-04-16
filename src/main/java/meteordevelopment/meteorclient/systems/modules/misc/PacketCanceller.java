@@ -49,4 +49,9 @@ public class PacketCanceller extends Module {
     private void onSendPacket(PacketEvent.Send event) {
         if (c2sPackets.get().contains(event.packet.getClass())) event.cancel();
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

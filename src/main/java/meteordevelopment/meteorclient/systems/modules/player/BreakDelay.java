@@ -61,4 +61,9 @@ public class BreakDelay extends Module {
     public boolean preventInstaBreak() {
         return isActive() && noInstaBreak.get();
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

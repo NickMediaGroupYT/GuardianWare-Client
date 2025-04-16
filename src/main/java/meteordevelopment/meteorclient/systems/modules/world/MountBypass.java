@@ -31,4 +31,9 @@ public class MountBypass extends Module {
             if (packet.getType() == PlayerInteractEntityC2SPacket.InteractType.INTERACT_AT && packet.getEntity() instanceof AbstractDonkeyEntity) event.cancel();
         }
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

@@ -51,4 +51,9 @@ public class Trail extends Module {
             mc.world.addParticle((ParticleEffect) particleType, mc.player.getX(), mc.player.getY(), mc.player.getZ(), 0, 0, 0);
         }
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

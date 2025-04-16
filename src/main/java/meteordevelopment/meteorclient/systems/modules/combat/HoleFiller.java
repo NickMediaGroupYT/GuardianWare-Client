@@ -238,6 +238,11 @@ public class HoleFiller extends Module {
         timer = 0;
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     @EventHandler
     private void onTick(TickEvent.Pre event) {
         if (smart.get()) setTargets();

@@ -62,4 +62,9 @@ public class ClickTP extends Module {
             }
         }
     }
+
+    @Override
+    public void onRender() {
+
+    }
 }

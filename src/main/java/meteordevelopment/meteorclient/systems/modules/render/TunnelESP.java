@@ -87,6 +87,11 @@ public class TunnelESP extends Module {
         chunks.clear();
     }
 
+    @Override
+    public void onRender() {
+
+    }
+
     private static int pack(int x, int y, int z) {
         return ((x & 0xFF) << 24) | ((y & 0xFFFF) << 8) | (z & 0xFF);
     }
