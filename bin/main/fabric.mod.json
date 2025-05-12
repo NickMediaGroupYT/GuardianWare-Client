@@ -1,0 +1,36 @@
+{
+	"schemaVersion": 1,
+	"id": "loottech",
+	"version": "${version}",
+	"name": "LootTech",
+	"description": "",
+	"authors": [
+		"jaxui",
+		"Fyzz",
+		"DannyEyes"
+	],
+	"contact": {
+		"sources": "https://github.com/FyzzLive/loottech"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/loottech/icon.png",
+	"accessWidener": "loottech.accesswidener",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+          "dev.loottech.LootTech"
+		]
+	},
+	"mixins": [
+		"loottech.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.9",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

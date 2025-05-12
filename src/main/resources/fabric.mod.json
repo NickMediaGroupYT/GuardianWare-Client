@@ -1,0 +1,38 @@
+{
+	"schemaVersion": 1,
+	"id": "guardianware",
+	"version": "${version}",
+	"name": "GuardianWare",
+	"description": "",
+	"authors": [
+		"NickCage2B2T",
+		"LootGuardian",
+		"Project Guardian",
+		"The GoodFellas"
+	],
+	"contact": {
+		"sources": "Project Guardian: https://discord.gg/QR969mXJkk",
+		"sources": "The GoodFellas: https://discord.gg/98nwx7bZAR"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/loottech/icon.png",
+	"accessWidener": "loottech.accesswidener",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+          "dev.guardianware.GuardianWare"
+		]
+	},
+	"mixins": [
+		"loottech.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.9",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

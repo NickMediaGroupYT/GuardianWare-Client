@@ -1,0 +1,34 @@
+{
+  "required": true,
+  "package": "dev.guardianware.asm.mixins",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "BossBarHudMixin",
+    "ClientConnectionMixin",
+    "ClientPlayerEntityMixin",
+    "ClientPlayerInteractionManagerMixin",
+    "ClientPlayNetworkHandlerMixin",
+    "EntityRendererMixin",
+    "GlyphMixin",
+    "HeldItemRendererMixin",
+    "IEntityVelocityUpdateS2CPacket",
+    "IExplosionS2CPacket",
+    "InGameHudMixin",
+    "InGameOverlayRendererMixin",
+    "KeyboardMixin",
+    "MinecraftClientMixin",
+    "MixinGameRenderer",
+    "MixinLightmapTextureManager",
+    "MouseMixin",
+    "ParticleManagerMixin",
+    "ProjectileEntityRendererMixin",
+    "WorldRendererMixin",
+    "accessor.AccessorClientWorld"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [
+    "LivingEntityMixin"
+  ]
+}
