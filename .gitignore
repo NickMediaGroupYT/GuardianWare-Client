@@ -2,3 +2,5 @@
 /run
 .idea
 /build
+/out
+/libs
