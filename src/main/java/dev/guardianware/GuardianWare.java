@@ -20,7 +20,7 @@ import java.awt.*;
 
 public class GuardianWare implements ModInitializer {
     public static final String NAME = "GuardianWare";
-    public static final String VERSION = "v14";
+    public static final String VERSION = "v15";
     public static final Logger LOGGER = LoggerFactory.getLogger("GuardianWare");
 
     public static Color COLOR_CLIPBOARD;

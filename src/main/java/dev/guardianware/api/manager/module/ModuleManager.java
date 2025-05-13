@@ -56,7 +56,6 @@ public class ModuleManager implements IMinecraft, EventListener {
         this.register(new AimBot());
         this.register(new KillAura());
         this.register(new AutoMineModule());
-        //this.register(new AutoMineModule());
 
         //Miscellaneous
         this.register(new FakePlayer());
@@ -68,7 +67,8 @@ public class ModuleManager implements IMinecraft, EventListener {
         this.register(new ModuleVelocity());
         this.register(new NoSlow());
         this.register(new ModuleFlight());
-        this.register(new ElytraBounce());
+        this.register(new ElytraFlight());
+        this.register(new AutoWalk());
 
         //Player
         this.register(new ModuleMultiTask());
