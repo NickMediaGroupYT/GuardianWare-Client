@@ -25,7 +25,7 @@ import net.minecraft.util.math.Direction;
 import java.util.*;
 
 
-@RegisterModule(name="ScientifySexDupe", description="trident funny dupe", category=Module.Category.PLAYER)
+@RegisterModule(name="KilletsTridentDupe", description="trident funny dupe", category=Module.Category.PLAYER)
 public class ScientifySexDupe extends Module {
     public ValueNumber delay = new ValueNumber("Delay","Delay","",5,0,10);
     public ValueBoolean dropTridents = new ValueBoolean("Drop Tridents","Drop Tridents","",false);

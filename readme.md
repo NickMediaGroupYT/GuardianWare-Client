@@ -29,5 +29,6 @@ You must use `.bind gui [key]`
 * NickCage2B2T
 * LootGuardian
 * Project Guardian
+* The GoodFellas
 
 ## Fork anytime
