@@ -22,5 +22,12 @@ You must use `.bind gui [key]`
 * jaxui
 * Fyzz
 * DannyEyes
+* Killet
+* MisterTrident
+* Laztec
+* Ionar
+* NickCage2B2T
+* LootGuardian
+* Project Guardian
 
 ## Fork anytime
