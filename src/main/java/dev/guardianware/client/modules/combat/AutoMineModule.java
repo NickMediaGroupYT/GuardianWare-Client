@@ -1,155 +1,124 @@
 package dev.guardianware.client.modules.combat;
 
-import dev.guardianware.GuardianWare;
 import dev.guardianware.api.manager.module.Module;
 import dev.guardianware.api.manager.module.RegisterModule;
-import dev.guardianware.api.utilities.InventoryUtils;
-import dev.guardianware.api.utilities.RangeUtils;
-import dev.guardianware.api.utilities.RenderUtils;
-import dev.guardianware.api.utilities.Timer;
+import dev.guardianware.api.utilities.*;
+import dev.guardianware.client.events.EventAttackBlock;
 import dev.guardianware.client.events.Render3DEvent;
 import dev.guardianware.client.values.impl.ValueBoolean;
 import dev.guardianware.client.values.impl.ValueColor;
-import dev.guardianware.client.values.impl.ValueNumber;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
-import net.minecraft.network.packet.c2s.play.UpdateSelectedSlotC2SPacket;
 import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Box;
-import net.minecraft.world.RaycastContext;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.*;
 
-@RegisterModule(name = "AutoMine", tag = "AutoMine", description = "Automatically mines blocks near enemy players.", category = Module.Category.COMBAT)
+@RegisterModule(name="AutoMine", tag="AutoMine", description="Grim-safe AutoMine using packets", category=Module.Category.COMBAT)
 public class AutoMineModule extends Module {
-    public ValueNumber range = new ValueNumber("Range", "Range", "", 4.5, 1.0, 10.0);
-    public ValueBoolean doRender = new ValueBoolean("Render", "Render", "", true);
-    public ValueColor fillColor = new ValueColor("Fill", "Fill", "", Color.WHITE);
-    public ValueColor outlineColor = new ValueColor("Outline", "Outline", "", Color.RED);
-    public ValueNumber lineWidth = new ValueNumber("LineWidth", "LineWidth", "", 1.0, 0.1, 5.0);
 
-    private BlockPos currentTarget = null;
-    private final Timer mineTimer = new Timer();
-    private final Map<BlockPos, Long> blockCooldowns = new HashMap<>();
+    private final ValueBoolean doubleMine = new ValueBoolean("DoubleMine", "DoubleMine", "Mine 2 blocks at once.", false);
+    private final ValueBoolean grimSpeed = new ValueBoolean("GrimSpeed", "GrimSpeed", "use 0.7 mining speed for grim servers", false);
+    private final ValueBoolean swing = new ValueBoolean("SwingHand", "SwingHand", "Visually swing hand when done mining block", false);
+    public final ValueColor fillColor = new ValueColor("Fill", "Fill", "", Color.WHITE);
+    public final ValueColor outlineColor = new ValueColor("Outline", "Outline", "", Color.WHITE);
+
+    private BlockPos singlePos, doublePos = null;
+    private double singleBreakingSpeed, doubleBreakingSpeed;
+    private Timer singleTimer = new Timer();
+    private Timer doubleTimer = new Timer();
+    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+    private ScheduledFuture<?> firstTask = null;
+    private ScheduledFuture<?> secondTask = null;
+
+    @Override
+    public void onAttackBlock(EventAttackBlock event) {
+        if (mc.world == null || mc.player == null) return;
+
+        if (BlockUtils.canBreak(event.getPos())) {
+            addNext(event.getPos());
+        }
+        event.cancel(); // Prevent vanilla mining
+    }
 
     @Override
     public void onTick() {
         if (mc.world == null || mc.player == null) return;
 
-        for (PlayerEntity player : mc.world.getPlayers()) {
-            if (player == mc.player || GuardianWare.FRIEND_MANAGER.isFriend(player.getName().getString())) continue;
-            if (!RangeUtils.isInRange(player, range.getValue().doubleValue())) continue;
+        if (singlePos != null && mc.world.getBlockState(singlePos).isAir()) singlePos = null;
+        if (doublePos != null && mc.world.getBlockState(doublePos).isAir()) doublePos = null;
 
-            BlockPos targetBlock = getAdjacentMineableBlock(player);
-            if (targetBlock != null && mineTimer.passedMs(500) && canMineNow(targetBlock)) {
-                mineBlock(targetBlock);
-                mineTimer.reset();
-                break; // Mine only one block per tick
+        if (mc.options.attackKey.isPressed() && mc.crosshairTarget != null &&
+                mc.crosshairTarget.getType() == net.minecraft.util.hit.HitResult.Type.BLOCK) {
+            BlockPos targetPos = ((net.minecraft.util.hit.BlockHitResult) mc.crosshairTarget).getBlockPos();
+            if (BlockUtils.canBreak(targetPos)) {
+                addNext(targetPos);
             }
         }
-    }
-
-    private BlockPos getAdjacentMineableBlock(PlayerEntity player) {
-        BlockPos base = player.getBlockPos();
-
-        for (Direction dir : Direction.values()) {
-            BlockPos offset = base.offset(dir);
-            if (canBreak(offset)) {
-                return offset;
-            }
-        }
-
-        return null;
-    }
-
-    private boolean canBreak(BlockPos pos) {
-        BlockState state = mc.world.getBlockState(pos);
-        Block block = state.getBlock();
-
-        return !state.isAir() && block.getHardness() >= 0 && !state.isLiquid();
-    }
-
-    private boolean canMineNow(BlockPos pos) {
-        long last = blockCooldowns.getOrDefault(pos, 0L);
-        return System.currentTimeMillis() - last > 750; // 750ms cooldown per block
-    }
-
-    private void mineBlock(BlockPos pos) {
-        BlockState state = mc.world.getBlockState(pos);
-        int toolSlot = InventoryUtils.getBestTool(state);
-
-        if (toolSlot != mc.player.getInventory().selectedSlot) {
-            mc.player.getInventory().selectedSlot = toolSlot;
-            mc.player.networkHandler.sendPacket(new UpdateSelectedSlotC2SPacket(toolSlot));
-        }
-
-        Direction direction = getRaycastFacing(pos);
-        if (direction == null) direction = Direction.UP; // fallback
-
-        // First dig start packet
-        mc.player.networkHandler.sendPacket(new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.START_DESTROY_BLOCK, pos, direction));
-        mc.player.swingHand(Hand.MAIN_HAND);
-
-        // Delayed second START_DESTROY_BLOCK + swing (Grim bypass)
-        Direction finalDirection = direction;
-        CompletableFuture.runAsync(() -> {
-            try {
-                long delay = 40 + new java.util.Random().nextInt(30); // 40-70ms delay
-                Thread.sleep(delay);
-            } catch (InterruptedException ignored) {}
-
-            mc.execute(() -> {
-                mc.player.networkHandler.sendPacket(new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.START_DESTROY_BLOCK, pos, finalDirection));
-                mc.player.swingHand(Hand.MAIN_HAND);
-
-                // Delayed STOP packet
-                CompletableFuture.runAsync(() -> {
-                    try {
-                        Thread.sleep(50); // 50 ms delay before sending STOP packet
-                    } catch (InterruptedException ignored) {}
-
-                    mc.execute(() -> {
-                        mc.player.networkHandler.sendPacket(new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK, pos, finalDirection));
-                    });
-                });
-            });
-        });
-
-        blockCooldowns.put(pos, System.currentTimeMillis());
-        currentTarget = pos;
-    }
-
-    private Direction getRaycastFacing(BlockPos pos) {
-        Vec3d eyePos = mc.player.getEyePos();
-        for (Direction dir : Direction.values()) {
-            Vec3d offset = Vec3d.ofCenter(pos).add(Vec3d.of(dir.getVector()).multiply(0.5));
-            BlockHitResult result = mc.world.raycast(
-                    new RaycastContext(eyePos, offset, RaycastContext.ShapeType.OUTLINE, RaycastContext.FluidHandling.NONE, mc.player)
-            );
-            if (result.getBlockPos().equals(pos)) {
-                return result.getSide();
-            }
-        }
-        return null;
     }
 
     @Override
     public void onRender3D(Render3DEvent event) {
-        if (!doRender.getValue() || mc.world == null || mc.player == null) return;
+        renderProgress(singlePos, singleTimer, singleBreakingSpeed, event);
+        renderProgress(doublePos, doubleTimer, doubleBreakingSpeed, event);
+    }
 
-        if (currentTarget != null) {
-            Box box = new Box(currentTarget);
-            RenderUtils.drawBox(event.getMatrices(), currentTarget, outlineColor.getValue(), lineWidth.getValue().doubleValue());
-            RenderUtils.drawBoxFilled(event.getMatrices(), box, fillColor.getValue());
+    private void renderProgress(BlockPos pos, Timer timer, double speed, Render3DEvent event) {
+        if (pos == null) return;
+        double tickProgress = timer.getPassedTicks() + event.getTickDelta();
+        double linear = MathHelper.clamp(tickProgress / speed, 0.0, 1.0);
+        double eased = Math.pow(linear, 2);
+        double scale = eased * 0.5;
+
+        Box box = new Box(pos).contract(0.5).expand(scale);
+
+        RenderUtils.setupRender();
+        RenderUtils.drawBox(event.getMatrices(), box, outlineColor.getValue(), 1.0);
+        RenderUtils.drawBoxFilled(event.getMatrices(), box, fillColor.getValue());
+        RenderUtils.endRender();
+    }
+
+    private void mineBlock(BlockPos pos, boolean isDouble) {
+        if (mc.player == null || mc.world == null) return;
+
+        int slot = InventoryUtils.getBestTool(mc.world.getBlockState(pos));
+        InventoryUtils.setSlot(slot); // Properly sync tool
+        InventoryUtils.syncToClient();
+
+        Direction dir = DirectionUtils.getDirection(pos);
+        RotationUtils.faceBlock(pos); // Ensure legit facing
+        Timer timer = isDouble ? doubleTimer : singleTimer;
+        timer.reset();
+
+        double breakSpeed = BlockUtils.getBlockBreakingSpeed(slot, mc.world.getBlockState(pos), mc.player.isOnGround());
+        if (grimSpeed.getValue()) breakSpeed *= 0.7;
+
+        sendPacket(new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.START_DESTROY_BLOCK, pos, dir));
+
+        ScheduledFuture<?> task = scheduler.schedule(() -> {
+            sendPacket(new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK, pos, dir));
+            if (swing.getValue()) mc.player.swingHand(Hand.MAIN_HAND);
+            if (isDouble) doublePos = null;
+            else singlePos = null;
+        }, (long)((1.0 / breakSpeed) * 1000L), TimeUnit.MILLISECONDS);
+
+        if (isDouble) {
+            doubleBreakingSpeed = breakSpeed;
+            doublePos = pos;
+            secondTask = task;
+        } else {
+            singleBreakingSpeed = breakSpeed;
+            singlePos = pos;
+            firstTask = task;
         }
+    }
+
+    private void addNext(BlockPos pos) {
+        if ((singlePos != null && singlePos.equals(pos)) || (doublePos != null && doublePos.equals(pos))) return;
+        if (singlePos == null) mineBlock(pos, false);
+        else if (doubleMine.getValue() && doublePos == null) mineBlock(pos, true);
     }
 }

@@ -4,7 +4,9 @@ import dev.guardianware.client.events.EventMotion;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 
 public class RotationUtils implements IMinecraft {
     private static float c;
@@ -271,5 +273,32 @@ public class RotationUtils implements IMinecraft {
         } else {
             return ans;
         }
+    }
+
+    public static void faceBlock(BlockPos pos) {
+        if (mc.player == null) return;
+
+        Vec3d eyes = mc.player.getEyePos();
+        Vec3d target = new Vec3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+
+        double dx = target.x - eyes.x;
+        double dy = target.y - eyes.y;
+        double dz = target.z - eyes.z;
+
+        double dist = Math.sqrt(dx * dx + dz * dz);
+        float yaw = (float) Math.toDegrees(Math.atan2(dz, dx)) - 90.0F;
+        float pitch = (float) -Math.toDegrees(Math.atan2(dy, dist));
+
+        // Apply rotation to player
+        mc.player.setYaw(yaw);
+        mc.player.setPitch(pitch);
+
+        // Sync rotation with server (critical for Grim)
+        mc.player.networkHandler.sendPacket(
+                new net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket.Full(
+                        mc.player.getX(), mc.player.getY(), mc.player.getZ(),
+                        yaw, pitch, mc.player.isOnGround()
+                )
+        );
     }
 }
